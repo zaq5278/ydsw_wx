@@ -29,6 +29,9 @@ angular.module('myApp.mainController',[])
             .state('edit_menDianSummary',{
                 templateUrl:'edit_menDianSummary.html'
             })
+            .state('customer_JxsDetail',{
+                templateUrl:'customer_JxsDetail.html'
+            })
     }).controller('mainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal) {
     //判断访问浏览器的是安卓还是iOS
     // var ua = navigator.userAgent.toLowerCase();
@@ -498,6 +501,25 @@ angular.module('myApp.mainController',[])
         $state.go('customerManagement');
         $scope.getShopOrJxsList();
     };
+    //点击经销商管理按钮重新获取数据
+    $scope.changeCustormerTabAndGetJxsList = function (tab) {
+        if (tab == '1'){
+            $scope.customerTab = tab;
+            document.getElementById('menDianGuanLiBtn').style.backgroundColor = 'red';
+            document.getElementById('menDianGuanLiBtn').style.color = 'white';
+            document.getElementById('jxsGuanLiBtn').style.backgroundColor = 'white';
+            document.getElementById('jxsGuanLiBtn').style.color = 'red';
+            $scope.getShopOrJxsList();
+        }else {
+            $scope.customerTab = tab;
+            document.getElementById('menDianGuanLiBtn').style.backgroundColor = 'white';
+            document.getElementById('menDianGuanLiBtn').style.color = 'red';
+            document.getElementById('jxsGuanLiBtn').style.backgroundColor = 'red';
+            document.getElementById('jxsGuanLiBtn').style.color = 'white';
+            $scope.getShopOrJxsList();
+        }
+
+    };
     //+ "&custname=新郑" 搜索时使用的
     $scope.isCustomerShowScroll = false;
     //获得门店或者经销商管理的数据
@@ -577,10 +599,15 @@ angular.module('myApp.mainController',[])
     //点击客户管理内门店或者经销商列表跳转
     $scope.goToTheCustomerDetaill = function (index) {
         $scope.lodingShow();
-        var url = myUrl + "app/getVistShopInfo.appjson?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&customerid=" + $scope.storeDetailList[index].CUSTOMERID + '&callback=JSON_CALLBACK';
+        var url = '';
+        if ($scope.customerTab == '2'){
+            url = myUrl + "app/getVistShopInfo.appjson?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&customerid=" + $scope.storeDetailList[index].CUSTOMERID + '&callback=JSON_CALLBACK';
+        }else {
+            url = myUrl + "app/getJxsInfo.appjson?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&customerid=" + $scope.storeDetailList[index].CUSTOMERID + '&callback=JSON_CALLBACK';
+        }
         $http.jsonp(url).success(function (result) {
             $scope.lodingHide();
-            console.log(result);
+            // console.log(result);
             if (result.msgCode == '0001'){
                 $scope.customer_MenDian = result.rows[0];
                 console.log($scope.customer_MenDian);
@@ -594,9 +621,15 @@ angular.module('myApp.mainController',[])
             if ($scope.customerTab == '2'){
                 $state.go('customer_MenDianDetail');
             }
+            if ($scope.customerTab == '1'){
+                $state.go('customer_JxsDetail');
+            }
             if (result.msgCode == '0002'){
                 alert(result.msgDesc);
                 $state.go('login');
+            }
+            if (result.msgCode == '0003'){
+                $scope.showAlert(result.msgDesc);
             }
         }).error(function () {
             $scope.promptShow("网络错误！");
