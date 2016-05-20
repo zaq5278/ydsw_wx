@@ -1,0 +1,46 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
+        <h1 class="title" style="text-align: center">差旅</h1>
+
+        <div class="buttons">
+            <button class="button icon ion-checkmark" ng-click="">提交</button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-select" style="height: 60px;border-top: none">
+                <span>类型选择:</span>
+                <select>
+                    <option selected>请选择类型</option>
+                    <option>出差</option>
+                    <option>住宿</option>
+                    <option>培训</option>
+                    <option>会议</option>
+                </select>
+            </label>
+            <label class="item">
+                <span>结束时间:</span>
+                <input id="dateTimeInput" placeholder="请选择结束日期时间!" ng-click="timeTouch('#dateTimeInput','datetime')" readonly style="border: none;background-color: white">
+            </label>
+            <label class="item">
+                <textarea style="width: 100%;height: 60px;border: none" placeholder="内容记录:"></textarea>
+            </label>
+            <label class="item">
+                <span>位置信息:</span>
+                <span>河南省惠济区英才街</span>
+            </label>
+            <label class="item">
+                <span>照片:</span>
+                <a class="button button-clear"><img src="imges/paizhao.png" style="width: 35px;height: 30px"></a>
+            </label>
+
+        </div>
+    </ion-content>
+
+</ion-view>

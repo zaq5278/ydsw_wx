@@ -1,0 +1,46 @@
+<ion-view>
+    <!--<ion-header-bar align-title="left" class="bar-calm">-->
+        <!--<div class="buttons">-->
+            <!--<button class="button icon ion-android-arrow-back" ng-click="goBackSignOrderDetailView()">返回上一页</button>-->
+        <!--</div>-->
+        <!--<h1 class="title"></h1>-->
+        <!--<div class="buttons">-->
+            <!--<button class="button icon ion-forward" ng-click="submitTheNewProduct('update')">提交</button>-->
+        <!--</div>-->
+    <!--</ion-header-bar>-->
+
+    <ion-content>
+        <div style="text-align: center">
+            <br/>
+            <br/>
+            <br/>
+            <img style="width: 200px;height: 200px;" src="./imges/sn_logo.png">
+        </div>
+        <div class="item" style="margin-left: 10px;margin-right: 10px;margin-top: 10px;border-left: none;border-top: none
+        ;border-right: none">
+            <span>账号:</span>
+            <label><input id="userName" style="border: none;width: 100%" placeholder="请输入您的账号!" ng-model="userName"></label>
+        </div>
+        <div class="item" style="margin-left: 10px;margin-right: 10px;border-left: none;border-right: none">
+            <table>
+                <tr>
+                    <td>
+                        <span>密码:</span>
+                    </td>
+                    <td>
+                        <label><input id="passWord" type="password" style="border: none;width: 100%" placeholder="请输入您的密码!" ng-model="passWord"></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 40px;width: 90%">
+            <button class="button button-assertive" style="width: 100%;margin-left: 5%" ng-click="login()">登录</button>
+        </div>
+        <div style="text-align: center;margin-top: 40px">
+            <a href="tel:037156978282">服务电话:037156978282</a>
+        </div>
+    </ion-content>
+
+
+
+</ion-view>

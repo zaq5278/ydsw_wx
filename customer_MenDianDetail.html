@@ -1,0 +1,85 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
+        <h1 class="title" style="text-align: center">{{customer_MenDian.CUSTNAME}}</h1>
+
+        <div class="buttons">
+            <button class="button icon ion-clipboard" ng-click="edit_MenDian()">编辑</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <label class="item">
+            <span style="color: #6b6e75">终端编号</span>
+            <span style="float: right">{{customer_MenDian.CUSTNO}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">终端名称</span>
+            <span style="float: right">{{customer_MenDian.CUSTNAME}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">位置</span>
+            <span style="float: right">{{customer_MenDian.POSITION}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">连锁</span>
+            <span style="float: right">{{customer_MenDian.CHAIN}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">渠道</span>
+            <span style="float: right">{{customer_MenDian.CHANNELS}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">部门名称</span>
+            <span style="float: right">{{customer_MenDian.DEPARTNAME}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">销售代表</span>
+            <span style="float: right">{{customer_MenDian.SALESMAN}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">理货员</span>
+            <span style="float: right">{{customer_MenDian.SALES_MAN1}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">理货员电话</span>
+            <span style="float: right">{{customer_MenDian.SALES_MAN_TEL}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">经销商业务员</span>
+            <span style="float: right">{{customer_MenDian.SALES_MAN3}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">所属经销商</span>
+            <span style="float: right">{{customer_MenDian.DEALER}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">省</span>
+            <span style="float: right">{{customer_MenDian.PROVINCE}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">市</span>
+            <span style="float: right">{{customer_MenDian.CITY}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">县</span>
+            <span style="float: right">{{customer_MenDian.COUNTY}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">地址</span>
+            <span style="float: right">{{customer_MenDian.ADDRESS}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">联系人</span>
+            <span style="float: right">{{customer_MenDian.LINKMAN}}</span>
+        </label>
+        <label class="item">
+            <span style="color: #6b6e75">联系电话</span>
+            <span style="float: right">{{customer_MenDian.PHONE}}</span>
+        </label>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,50 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
+        <h1 class="title" style="text-align: center">打卡</h1>
+
+        <div class="buttons">
+            <!--<button class="" ng-click=""></button>-->
+        </div>
+    </ion-header-bar>
+    <ion-content overflow-scroll="false">
+        <div style="text-align: center;margin-top: 15px;padding-bottom: 15px;border-bottom: double 1px #eeeeee;">
+            <span>{{ todayDate | date:'yyyy年MM月dd日' }}</span>
+        </div>
+        <div style="margin-top: 10px;border-bottom: double 1px #eeeeee">
+            <table style="width: 100%;text-align: center;height: 85px">
+                <tr>
+                    <td style="padding-left: 5%;padding-top: 20px"><div style="color: #1ba1e2;">{{punchTheclockDetail[0].ALLNUM}}</div><div>累计打卡</div></td>
+                    <td><a class="button button-clear button-light" style="margin-top: -22px" ng-click="pressAndClock()"><img src="imges/press-daka.png" style="text-align: center;width: 80px;height: 80px;"></a></td>
+                    <td style="padding-right: 5%;padding-top: 20px"><div style="color: #1ba1e2;">{{punchTheclockDetail[0].LATENUM}}</div><div>迟到次数</div></td>
+                </tr>
+            </table>
+        </div>
+        <div class="item" ng-repeat="clockDate in dateArray" style="font-size: 13px">
+            <table>
+                <tr>
+                    <td><img id="{{'shangbanImg' + $index}}" src="imges/tuoyuan.png" style="width:10px;height: 10px;border-radius: 5px;"></td>
+                    <td><span style="margin-left: 5px">{{getTheClockSummary(clockDate,'下班',$index).FDATE}}</span></td>
+                    <td><span style="margin-left: 5px">{{getTheClockSummary(clockDate,'下班',$index).DAYNAME}}</span></td>
+                    <td><span style="margin-left: 5px">下班</span></td>
+                    <td><span style="color: red;margin-left: 5px">{{getTheClockSummary(clockDate,'下班',$index).FTIME == "未打卡" ? "未打卡" : getTheClockSummary(clockDate,'下班',$index).FTIME}}</span></td>
+                    <td><div style="margin-left: 8px"><span style="width: 30px;" class="item-text-wrap">{{getTheClockSummary(clockDate,'上班',$index).OUTSHORTADDR == "" ? "" : getTheClockSummary(clockDate,'上班',$index).OUTSHORTADDR}}</span></div></td>
+                </tr>
+            </table>
+            <table style="margin-top: 10px">
+                <tr>
+                    <td><img id="{{'xiabanImg' + $index}}" src="imges/tuoyuan.png" style="width:10px;height: 10px;border-radius: 30px;"></td>
+                    <td><span style="margin-left: 5px">{{getTheClockSummary(clockDate,'上班',$index).FDATE}}</span></td>
+                    <td><span style="margin-left: 5px">{{getTheClockSummary(clockDate,'上班',$index).DAYNAME}}</span></td>
+                    <td><span style="margin-left: 5px">上班</span></td>
+                    <td><span style="color: red;margin-left: 5px">{{getTheClockSummary(clockDate,'上班',$index).FTIME == "未打卡" ? "未打卡" : getTheClockSummary(clockDate,'上班',$index).FTIME}}</span></td>
+                    <td><div style="margin-left: 8px"><span style="width: 30px" class="item-text-wrap">{{getTheClockSummary(clockDate,'上班',$index).SHORTADDR == "" ? "" : getTheClockSummary(clockDate,'上班',$index).SHORTADDR}}</span></div></td>
+                </tr>
+            </table>
+        </div>
+    </ion-content>
+</ion-view>
