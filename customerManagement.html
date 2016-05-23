@@ -22,14 +22,14 @@
 
         </div>
         <div class="buttons">
-            <button class="button icon ion-plus" ng-click=""></button>
+            <button ng-show="customerTab == '2'" class="button icon ion-plus" ng-click="addNewMenDian()"></button>
         </div>
     </ion-header-bar>
     <label class="item item-input" style="width: 98%;margin: 0 auto;border-radius: 30px;height: 35px;margin-top: 47px;">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="搜索">
+        <input id="customer_search" type="text" placeholder="搜索" ng-model="customer_search" ng-change="getShopOrJxsList('search')">
     </label>
-    <ion-content  overflow-scroll='false' style="margin-top: 42px">
+    <ion-content id="contentDiv" overflow-scroll='false' style="margin-top: 42px">
         <div ng-repeat="storeDetail in storeDetailList">
             <a class="item item-thumbnail-left" href="#" ng-click="goToTheCustomerDetaill($index)">
                 <img src="imges/mendian.png" style="width: 68px;height: 68px;margin-top: 5px;margin-bottom: 0">

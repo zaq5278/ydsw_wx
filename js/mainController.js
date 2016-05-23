@@ -292,7 +292,7 @@ angular.module('myApp.mainController',[])
             }
             $scope.dateArray = $scope.dateArray.concat(m + "-" + i);
         }
-        console.log($scope.dateArray);
+        // console.log($scope.dateArray);
         if(d <= 9){
             d = '0'+d;
         }
@@ -499,7 +499,10 @@ angular.module('myApp.mainController',[])
         //tab = 2;//2代表默认的是门店 1代表的是经销商
         $scope.customerTab = '2';//初始化请求状态是经销商还是门店
         $state.go('customerManagement');
-        $scope.getShopOrJxsList();
+        $timeout(function () {
+            $scope.getShopOrJxsList();
+        }, 500);
+        $scope.customer_search = '';
     };
     //点击经销商管理按钮重新获取数据
     $scope.changeCustormerTabAndGetJxsList = function (tab) {
@@ -518,21 +521,38 @@ angular.module('myApp.mainController',[])
             document.getElementById('jxsGuanLiBtn').style.color = 'white';
             $scope.getShopOrJxsList();
         }
-
+        // console.log(document.getElementById('contentDiv'));
+        var contentDiv = document.getElementById("contentDiv");
+        var childs = contentDiv.childNodes;
+        for (var i = 0; i < childs.length; i++) {
+            if (childs[i].className == 'scroll')
+                childs = childs[i];
+        }
+        // console.log(childs);
+        childs.style.transform = 'translate3d(0,0,0) scale(1)';
     };
     //+ "&custname=新郑" 搜索时使用的
     $scope.isCustomerShowScroll = false;
     //获得门店或者经销商管理的数据
-    $scope.getShopOrJxsList = function () {
+    $scope.getShopOrJxsList = function (str) {
         $scope.lodingShow();
         $scope.isCustomerShowScroll = false;//初始化下拉刷新
         $scope.storeDetailList = [];//初始化接受客户管理的数据数组
         $scope.customerPage = 1;//初始化页数
         $scope.isCustomerRun = false;//用于锁定上拉加载的线程
-        var url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&page=1" +"&rows=10" + '&callback=JSON_CALLBACK';
+        $scope.customer_MenDian = [];
+        var url = '';
+        if (str == "search"){
+            $scope.customer_search = true;
+            url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&custname=" + document.getElementById("customer_search").value + "&page=1" +"&rows=10" + '&callback=JSON_CALLBACK';
+        }else {
+            url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&page=1" +"&rows=10" + '&callback=JSON_CALLBACK';
+        }
+
         $http.jsonp(url).success(function (result) {
+            $scope.lodingHide();
+            // console.log(result);
             if (result.msgCode == '0001'){
-                $scope.lodingHide();
                 $scope.storeDetailList = result.rows;
                 // console.log($scope.storeDetailList);
                 $scope.isCustomerShowScroll = true;
@@ -562,15 +582,32 @@ angular.module('myApp.mainController',[])
                 $scope.customerPage+=1;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             } else {
-                var url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&page=" + $scope.customerPage +"&rows=10" + '&callback=JSON_CALLBACK';
+                var url = '';
+                if ($scope.customer_search){
+                    url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&custname=" + document.getElementById("customer_search").value + "&page=1" +"&rows=10" + '&callback=JSON_CALLBACK';
+                }else {
+                    url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&page=1" +"&rows=10" + '&callback=JSON_CALLBACK';
+                }
+                // var url = myUrl + "app/getVistShopList.appjsonp?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&tab=" + $scope.customerTab + "&page=" + $scope.customerPage +"&rows=10" + '&callback=JSON_CALLBACK';
                 $http.jsonp(url).success(function (result) {
                     if (result.msgCode == "0001") {
                         $scope.isCustomerRun = true;
                         if (result.rows.length != 0) {
-                            $scope.storeDetailList = $scope.storeDetailList.concat(result.rows);
-                            // console.log($scope.storeDetailList);
-                            $scope.customerPage+=1;
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            if (result.rows.length < 10){
+                                $scope.isCustomerShowScroll = false;
+                                // $scope.$broadcast('scroll.infiniteScrollComplete');
+                                // $scope.storeDetailList = $scope.storeDetailList.concat(result.rows);
+                                $scope.promptShow("无更多数据！");
+                                $timeout(function () {
+                                    $scope.lodingHide();
+                                }, 500);
+                            }else {
+                                $scope.storeDetailList = $scope.storeDetailList.concat(result.rows);
+                                // console.log($scope.storeDetailList);
+                                $scope.customerPage+=1;
+                                $scope.$broadcast('scroll.infiniteScrollComplete');
+                            }
+
                         } else {
                             $scope.isCustomerShowScroll = false;
                             $scope.promptShow("无更多数据！");
@@ -610,7 +647,7 @@ angular.module('myApp.mainController',[])
             // console.log(result);
             if (result.msgCode == '0001'){
                 $scope.customer_MenDian = result.rows[0];
-                console.log($scope.customer_MenDian);
+                // console.log($scope.customer_MenDian);
                 if ($scope.customer_MenDian.PROVINCE){
                     $scope.getShiQuDetail('getCity',$scope.customer_MenDian.PROVINCE);
                 }
@@ -641,6 +678,7 @@ angular.module('myApp.mainController',[])
 
     //编辑门店信息
     $scope.edit_MenDian = function () {
+        $scope.isAddNewMenDian = false;//
         $ionicModal.fromTemplateUrl('edit_menDianSummary.html', {
             scope: $scope,
             animation: 'slide-in-up'// <---- 改变这里，默认是'slide-in-up' 换成slide-in-left试试
@@ -686,17 +724,93 @@ angular.module('myApp.mainController',[])
         })
     };
     $scope.sumbitTheEdited_MenDian = function () {
-        $scope.lodingShow();
+        // $scope.lodingShow();
         if ($scope.customer_MenDian.CHAIN == undefined){
             $scope.customer_MenDian.CHAIN = '';
         }
         if ($scope.customer_MenDian.CHANNELS == undefined){
             $scope.customer_MenDian.CHANNELS = '';
         }
+        if ($scope.customer_MenDian.CUSTNAME == undefined && $scope.isAddNewMenDian){
+            $scope.showAlert("终端名称是必填项,请填写完整后提交!");
+            return;
+        }
+        if ($scope.customer_MenDian.CUSTNAME == undefined){
+            $scope.customer_MenDian.CUSTNAME = '';
+        }
+
+        if ($scope.customer_MenDian.CUSTNO == undefined){
+            $scope.customer_MenDian.CUSTNO = '';
+        }
+        if ($scope.customer_MenDian.DEPARTCODE == undefined){
+            $scope.customer_MenDian.DEPARTCODE = '';
+        }
+        if ($scope.customer_MenDian.DEPARTNAME == undefined && $scope.isAddNewMenDian){
+            $scope.showAlert("部门名称是必填项,请选择后提交!");
+            return;
+        }
+        if ($scope.customer_MenDian.DEPARTNAME == undefined){
+            $scope.customer_MenDian.DEPARTNAME = '';
+        }
+
+        if ($scope.customer_MenDian.SALESMAN == undefined && $scope.isAddNewMenDian){
+            $scope.showAlert("销售代表是必填项,请选择后提交!");
+            return;
+        }
+        if ($scope.customer_MenDian.SALESMAN == undefined){
+            $scope.customer_MenDian.SALESMAN = '';
+        }
+        if ($scope.customer_MenDian.DEALER == undefined){
+            $scope.customer_MenDian.DEALER = '';
+        }
+        if ($scope.customer_MenDian.ADDRESS == undefined){
+            $scope.customer_MenDian.ADDRESS = '';
+        }
+        if ($scope.customer_MenDian.LINKMAN == undefined){
+            $scope.customer_MenDian.LINKMAN = '';
+        }
+        if ($scope.customer_MenDian.PHONE == undefined){
+            $scope.customer_MenDian.PHONE = '';
+        }
+        if ($scope.customer_MenDian.PROVINCE == undefined && $scope.isAddNewMenDian){
+            $scope.showAlert("省份是必填项,请选择后提交!");
+            return;
+        }
+        if ($scope.customer_MenDian.PROVINCE == undefined){
+            $scope.customer_MenDian.PROVINCE = '';
+        }
+        if ($scope.customer_MenDian.CITY == undefined && $scope.isAddNewMenDian){
+            $scope.showAlert("市区是必填项,请选择后提交!");
+            return;
+        }
+        if ($scope.customer_MenDian.CITY == undefined){
+            $scope.customer_MenDian.CITY = '';
+        }
+        if ($scope.customer_MenDian.COUNTY == undefined && $scope.isAddNewMenDian){
+            $scope.showAlert("县区是必填项,请选择后提交!");
+            return;
+        }
+        if ($scope.customer_MenDian.COUNTY == undefined){
+            $scope.customer_MenDian.COUNTY = '';
+        }
+
+        if ($scope.customer_MenDian.SALES_MAN1 == undefined || $scope.customer_MenDian.SALES_MAN1 == '无数据'){
+            $scope.customer_MenDian.SALES_MAN1 = '';
+        }
+        if ($scope.customer_MenDian.SALES_MAN3 == undefined || $scope.customer_MenDian.SALES_MAN3 == '无数据'){
+            $scope.customer_MenDian.SALES_MAN3 = '';
+        }
+        if ($scope.customer_MenDian.SALES_MAN_TEL == undefined){
+            $scope.customer_MenDian.SALES_MAN_TEL = '';
+        }
+        if ($scope.customer_MenDian.CUSTOMERID == undefined){
+            $scope.customer_MenDian.CUSTOMERID = '';
+        }
+        
         var countyId = '';//县区id
         var salesmanid = '';//销售代表id
         var dealerid = '';//所属经销商id
-        if ($scope.xianQuList.rows.length > 0){
+        if ($scope.xianQuList && $scope.xianQuList.rows.length > 0){
             for (var i = 0;i < $scope.xianQuList.rows.length;i++){
                 if ($scope.customer_MenDian.COUNTY == $scope.xianQuList.rows[i].COUNTY){
                     countyId = $scope.xianQuList.rows[i].COUNTYID;
@@ -706,7 +820,7 @@ angular.module('myApp.mainController',[])
         }else {
             countyId = '';
         }
-        if ($scope.xiaoShouDaiBiaoList.rows.length > 0){
+        if ($scope.xiaoShouDaiBiaoList && $scope.xiaoShouDaiBiaoList.rows.length > 0){
             for (var j = 0;j < $scope.xiaoShouDaiBiaoList.rows.length;j++){
                 if ($scope.customer_MenDian.SALESMAN == $scope.xiaoShouDaiBiaoList.rows[j].STAFF_NAME){
                     salesmanid = $scope.xiaoShouDaiBiaoList.rows[j].ID;
@@ -716,7 +830,7 @@ angular.module('myApp.mainController',[])
         }else {
             salesmanid = '';
         }
-        if ($scope.suoShuJxsList.rows.length > 0){
+        if ($scope.suoShuJxsList && $scope.suoShuJxsList.rows.length > 0){
             for (var k = 0;k < $scope.suoShuJxsList.rows.length;k++){
                 if ($scope.customer_MenDian.DEALER == $scope.suoShuJxsList.rows[k].CUSTNAME){
                     dealerid = $scope.suoShuJxsList.rows[k].CUSTOMERID;
@@ -726,16 +840,25 @@ angular.module('myApp.mainController',[])
         }else {
             dealerid = '';
         }
-        var url = myUrl + "app/updateShopInfo.appjsone?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&custno=" + $scope.customer_MenDian.CUSTNO + "&custname=" + $scope.customer_MenDian.CUSTNAME + "&longitude=" + '' + "&latitude=" + '' + "&chain=" + $scope.customer_MenDian.CHAIN + "&channels=" + $scope.customer_MenDian.CHANNELS + "&departcode=" + $scope.customer_MenDian.DEPARTCODE + "&departname=" + $scope.customer_MenDian.DEPARTNAME + "&salesman=" + $scope.customer_MenDian.SALESMAN + "&dealer=" + $scope.customer_MenDian.DEALER + "&address=" + $scope.customer_MenDian.ADDRESS + "&linkman=" + $scope.customer_MenDian.LINKMAN + "&phone=" + $scope.customer_MenDian.PHONE + "&county=" + $scope.customer_MenDian.COUNTY + "&city=" + $scope.customer_MenDian.CITY + "&province=" + $scope.customer_MenDian.PROVINCE + "&salesman1=" + $scope.customer_MenDian.SALES_MAN1 + "&salesman3=" + $scope.customer_MenDian.SALES_MAN3 + "&sales_man_tel=" + $scope.customer_MenDian.SALES_MAN_TEL + "&customerid=" + $scope.customer_MenDian.CUSTOMERID + "&countyid=" + countyId + "&salesmanid=" + salesmanid + "&dealerid=" + dealerid + "&salesmanid1=" + "&salesmanid3=" +  '&callback=JSON_CALLBACK';
+        var urlStr = 'updateShopInfo';
+        if ($scope.isAddNewMenDian){
+            urlStr = 'addShop';
+        }
+        var url = myUrl + "app/" + urlStr +".appjsone?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&custno=" + $scope.customer_MenDian.CUSTNO + "&custname=" + $scope.customer_MenDian.CUSTNAME + "&longitude=" + '' + "&latitude=" + '' + "&chain=" + $scope.customer_MenDian.CHAIN + "&channels=" + $scope.customer_MenDian.CHANNELS + "&departcode=" + $scope.customer_MenDian.DEPARTCODE + "&departname=" + $scope.customer_MenDian.DEPARTNAME + "&salesman=" + $scope.customer_MenDian.SALESMAN + "&dealer=" + $scope.customer_MenDian.DEALER + "&address=" + $scope.customer_MenDian.ADDRESS + "&linkman=" + $scope.customer_MenDian.LINKMAN + "&phone=" + $scope.customer_MenDian.PHONE + "&county=" + $scope.customer_MenDian.COUNTY + "&city=" + $scope.customer_MenDian.CITY + "&province=" + $scope.customer_MenDian.PROVINCE + "&salesman1=" + $scope.customer_MenDian.SALES_MAN1 + "&salesman3=" + $scope.customer_MenDian.SALES_MAN3 + "&sales_man_tel=" + $scope.customer_MenDian.SALES_MAN_TEL + "&customerid=" + $scope.customer_MenDian.CUSTOMERID + "&countyid=" + countyId + "&salesmanid=" + salesmanid + "&dealerid=" + dealerid + "&salesmanid1=" + "&salesmanid3=" +  '&callback=JSON_CALLBACK';
         $http.jsonp(url).success(function (result) {
+            // console.log(result);
             $scope.lodingHide();
             if (result.msgCode == '0001'){
-                $scope.showAlert('更新成功!');
+                $scope.showAlert(result.msgDesc);
                 $scope.closeModal();
             }
             if (result.msgCode == '0006'){
-                $scope.showAlert('更新失败!');
+                $scope.showAlert(result.msgDesc);
                 $scope.closeModal();
+            }
+            if (result.msgCode == '0002'){
+                alert(result.msgDesc);
+                $state.go('login');
             }
         }).error(function () {
             $scope.promptShow("网络错误！");
@@ -743,5 +866,17 @@ angular.module('myApp.mainController',[])
                 $scope.lodingHide();
             }, 500);
         })
+    };
+    $scope.isAddNewMenDian = false;
+    $scope.addNewMenDian = function () {
+        $scope.customer_MenDian= [];
+        $ionicModal.fromTemplateUrl('edit_menDianSummary.html', {
+            scope: $scope,
+            animation: 'slide-in-up'// <---- 改变这里，默认是'slide-in-up' 换成slide-in-left试试
+        }).then(function(modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
+        $scope.isAddNewMenDian = true;
     }
 });

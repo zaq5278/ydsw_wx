@@ -13,7 +13,7 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <label class="item" >
+        <label ng-show="isAddNewMenDian == false" class="item" >
             <span style="color: #6b6e75">终端编号</span>
             <input style="float: right" type="text" ng-model="customer_MenDian.CUSTNO">
         </label>
@@ -27,7 +27,7 @@
         </label>
         <label class="item item-select">
             <span style="color: #6b6e75">连锁</span>
-            <select style="float: right" ng-model="customer_MenDian.CHAIN" ng-options="lanSuo.CHAINNAME as lanSuo.CHAINNAME for lanSuo in lianSuoList.rows">
+            <select style="float: right" ng-model="customer_MenDian.CHAIN" ng-options="lianSuo.CHAINNAME as lianSuo.CHAINNAME for lianSuo in lianSuoList.rows">
                 <option value="" ng-show="!customer_MenDian.CHAIN">请选择连锁</option>
             </select>
         </label>
