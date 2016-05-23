@@ -501,7 +501,7 @@ angular.module('myApp.mainController',[])
         $state.go('customerManagement');
         $timeout(function () {
             $scope.getShopOrJxsList();
-        }, 500);
+        }, 300);
         $scope.customer_search = '';
     };
     //点击经销商管理按钮重新获取数据
