@@ -149,6 +149,9 @@ angular.module('myApp.mainController',[])
     };
     //跳转到新的界面
     $scope.goToNewView = function (str) {
+        if (str == 'travelOnBusiness'){
+            $scope.getLocation_by_wx();
+        }
         $state.go(str);
     };
     //没有时间的日期选择框架
@@ -337,11 +340,14 @@ angular.module('myApp.mainController',[])
     };
     //点击打卡按钮进行打卡
     $scope.pressAndClock = function (longitude,latitude,address) {
-        longitude =113.65;
-        //纬度
-        // $scope.baiduLatitude = position.coords.latitude;
-        latitude = 34.86;
-        address = '河南省惠济区英才街';
+        // longitude =113.65;
+        // //纬度
+        // // $scope.baiduLatitude = position.coords.latitude;
+        // latitude = 34.86;
+        // address = '河南省惠济区英才街';
+        // alert(longitude);
+        // alert(latitude);
+        // alert(address);
         var date = new Date();
         var h = date.getHours();
         var m = date.getMinutes();
@@ -375,7 +381,34 @@ angular.module('myApp.mainController',[])
             }, 500);
         });
     };
-    
+    //获取位置信息
+    $scope.getLocation_by_wx = function (str) {
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                // var speed = res.speed; // 速度，以米/每秒计
+                // var accuracy = res.accuracy; // 位置精度
+                // var map = new BMap.Map("allmap");
+                var point = new BMap.Point(parseFloat(longitude) - 0.008774687519, parseFloat(latitude) + 0.00374531687912);
+                // var point = new BMap.Point(113.654144,34.860686);
+                $scope.clickLongitude = longitude - 0.008774687519;//存放提交的时候的经度
+                $scope.clickLatitude = latitude + 0.00374531687912;//存放提交的时候的纬度
+                var gc = new BMap.Geocoder();
+                gc.getLocation(point, function (rs) {
+                    var addComp = rs.addressComponents;
+                    $timeout(function () {
+                        $scope.userLocation = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;//获取到的位置信息
+                        if(str == 'daka'){
+                            $scope.pressAndClock($scope.clickLongitude,$scope.clickLatitude,$scope.userLocation);
+                        }
+                    });
+
+                });
+            }
+        });
+    };
 
     //提交差旅出差信息
 
