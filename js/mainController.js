@@ -84,30 +84,31 @@ angular.module('myApp.mainController',[])
         $scope.userDetail = JSON.parse(localStorage.ydsw_userDetail);
     }
     $scope.punchTheclockDetail = [];
-    // window.onload = function () {
-    //     var url = 'http://192.168.16.225:9999/synear/orderReceiptController.do?getWechatConfigureList'+ '&url=' + window.location.href + '&callback=JSON_CALLBACK';
-    //     $http.jsonp(url).success(function (result) {
-    //         if (result.msgCode == "0002") {
-    //             alert(result.msgDesc);
-    //             $state.go("login");
-    //         } else {
-    //             wx.config({
-    //                 debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    //                 appId: 'wx79476edda797a503', // 必填，公众号的唯一标识
-    //                 timestamp: result.timestamp, // 必填，生成签名的时间戳
-    //                 nonceStr: result.noncestr, // 必填，生成签名的随机串
-    //                 signature: result.signature,// 必填，签名，见附录1
-    //                 jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'openLocation', 'getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-    //             });
-    //             wx.hideOptionMenu();
-    //         }
-    //     }).error(function () {
-    //         $scope.promptShow("网络错误！");
-    //         $timeout(function () {
-    //             $scope.lodingHide();
-    //         }, 500);
-    //     });
-    // };
+    window.onload = function () {
+        var url = 'http://222.88.22.72:100/orderReceiptController.do?getWechatConfigureList'+ '&url=' + window.location.href + '&callback=JSON_CALLBACK';
+        $http.jsonp(url).success(function (result) {
+            // console.log(result);
+            if (result.msgCode == "0002") {
+                // alert(result.msgDesc);
+                $state.go("login");
+            } else {
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: 'wx79476edda797a503', // 必填，公众号的唯一标识
+                    timestamp: result.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: result.noncestr, // 必填，生成签名的随机串
+                    signature: result.signature,// 必填，签名，见附录1
+                    jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'openLocation', 'getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                wx.hideOptionMenu();
+            }
+        }).error(function () {
+            $scope.promptShow("网络错误！");
+            $timeout(function () {
+                $scope.lodingHide();
+            }, 500);
+        });
+    };
 
 
     //返回首页
@@ -374,72 +375,7 @@ angular.module('myApp.mainController',[])
             }, 500);
         });
     };
-    //百度定位
-    $scope.getLocationByBaiDu = function () {
-        $scope.lodingShow();
-        function getLocation(){
-            var options={
-                enableHighAccuracy:true,
-                maximumAge:1000
-            };
-            if(navigator.geolocation){
-                //浏览器支持geolocation
-                navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
-
-            }else{
-                //浏览器不支持geolocation
-                alert("您的浏览器不支持定位！");
-            }
-        }
-
-        //成功时
-        function onSuccess(position){
-            //返回用户位置
-            //经度
-            // $scope.baiduLongitude =position.coords.longitude;
-            $scope.baiduLongitude =113.65418888040259;
-            //纬度
-            // $scope.baiduLatitude = position.coords.latitude;
-            $scope.baiduLatitude = 34.86031504883444;
-            //var map = new BMap.Map("allmap");
-            var point = new BMap.Point($scope.baiduLongitude-0.008774687519,$scope.baiduLatitude+0.00374531687912);
-            var gc = new BMap.Geocoder();
-            gc.getLocation(point, function(rs){
-                var addComp = rs.addressComponents;
-                $scope.address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
-                if (addComp){
-                    $scope.pressAndClock($scope.baiduLongitude,$scope.baiduLatitude,$scope.address);
-                }
-                // alert($scope.baiduLongitude);
-                // alert($scope.baiduLatitude);
-                // alert($scope.address);
-            });
-        }
-        //失败时
-        function onError(error){
-            $scope.lodingHide();
-            switch(error.code){
-                case 1:
-                    alert("位置服务被拒绝");
-                    break;
-
-                case 2:
-                    alert("暂时获取不到位置信息");
-                    break;
-
-                case 3:
-                    alert("获取信息超时");
-                    break;
-
-                case 4:
-                    alert("未知错误");
-                    break;
-            }
-
-        }
-        getLocation();
-
-    };
+    
 
     //提交差旅出差信息
 

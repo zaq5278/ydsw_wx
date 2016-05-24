@@ -4,3 +4,69 @@
 </ion-content>
 
 </ion-view>
+//百度定位
+$scope.getLocationByBaiDu = function () {
+$scope.lodingShow();
+function getLocation(){
+var options={
+enableHighAccuracy:true,
+maximumAge:1000
+};
+if(navigator.geolocation){
+//浏览器支持geolocation
+navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
+
+}else{
+//浏览器不支持geolocation
+alert("您的浏览器不支持定位！");
+}
+}
+
+//成功时
+function onSuccess(position){
+//返回用户位置
+//经度
+// $scope.baiduLongitude =position.coords.longitude;
+$scope.baiduLongitude =113.65418888040259;
+//纬度
+// $scope.baiduLatitude = position.coords.latitude;
+$scope.baiduLatitude = 34.86031504883444;
+//var map = new BMap.Map("allmap");
+var point = new BMap.Point($scope.baiduLongitude-0.008774687519,$scope.baiduLatitude+0.00374531687912);
+var gc = new BMap.Geocoder();
+gc.getLocation(point, function(rs){
+var addComp = rs.addressComponents;
+$scope.address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+if (addComp){
+$scope.pressAndClock($scope.baiduLongitude,$scope.baiduLatitude,$scope.address);
+}
+// alert($scope.baiduLongitude);
+// alert($scope.baiduLatitude);
+// alert($scope.address);
+});
+}
+//失败时
+function onError(error){
+$scope.lodingHide();
+switch(error.code){
+case 1:
+alert("位置服务被拒绝");
+break;
+
+case 2:
+alert("暂时获取不到位置信息");
+break;
+
+case 3:
+alert("获取信息超时");
+break;
+
+case 4:
+alert("未知错误");
+break;
+}
+
+}
+getLocation();
+
+};
