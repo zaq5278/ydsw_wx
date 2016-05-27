@@ -149,6 +149,7 @@ angular.module('myApp.mainController',[])
     };
     //跳转到新的界面
     $scope.goToNewView = function (str) {
+        $scope.travelCameraImg = '';
         if (str == 'travelOnBusiness'){
             $scope.getLocation_by_wx();
         }
@@ -388,10 +389,21 @@ angular.module('myApp.mainController',[])
             success: function (res) {
                 var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                // var baidu_url = "http://api.map.baidu.com/geoconv/v1/?coords=" + '113.6542,34.86024' + "&ak=uCgec5YyeCeFkPLILZLS2guLOraELess&output=json" + '&callback=JSON_CALLBACK';
+                // $http.jsonp(baidu_url).success(function (data) {
+                //     longitude = data.result[0].x;
+                //     latitude = data.result[0].y;
+                // }).error(function () {
+                //     $scope.promptShow("网络错误！");
+                //     $timeout(function () {
+                //         $scope.lodingHide();
+                //     }, 500);
+                // });
                 // var speed = res.speed; // 速度，以米/每秒计
                 // var accuracy = res.accuracy; // 位置精度
                 // var map = new BMap.Map("allmap");
                 var point = new BMap.Point(parseFloat(longitude) - 0.008774687519, parseFloat(latitude) + 0.00374531687912);
+                // var point = new BMap.Point(parseFloat(longitude), parseFloat(latitude));
                 // var point = new BMap.Point(113.654144,34.860686);
                 $scope.clickLongitude = longitude - 0.008774687519;//存放提交的时候的经度
                 $scope.clickLatitude = latitude + 0.00374531687912;//存放提交的时候的纬度
@@ -409,7 +421,35 @@ angular.module('myApp.mainController',[])
             }
         });
     };
+    //调用微信拍照
+    $scope.openCamera = function () {
+        if($scope.travelCameraImg){
+            $scope.showAlert("您已经拍过照片了!");
+            return;
+        }
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                var localIds = res.localIds;// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                $scope.travelCameraImg = localIds[localIds.length - 1];
+                document.getElementById("travelCameraImg").src = localIds[localIds.length - 1];
+                $timeout(function () {
 
+                });
+                $timeout(function () {
+                    wx.uploadImage({
+                        localId: localIds[localIds.length - 1], // 需要上传的图片的本地ID，由chooseImage接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            var serverId = res.serverId; // 返回图片的服务器端ID
+                        }
+                    });
+                }, 100);
+            }
+        })
+    };
     //提交差旅出差信息
 
     //提交请假信息
