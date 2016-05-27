@@ -16,12 +16,12 @@
     <link href="js/mobiscroll.custom-2.5.0.min.css" rel="stylesheet" type="text/css" />
     <script src="js/mobiscroll.custom-2.5.0.min.js" type="text/javascript"></script>
     <!--百度地图定位的js-->
-    <script src="http://api.map.baidu.com/api?v=2.0" type="text/javascript"></script>
+    <!--<script src="http://api.map.baidu.com/api?v=2.0" type="text/javascript"></script>-->
     <!--自己的js-->
     <script type="text/javascript" src="js/mainController.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 </head>
-<body ng-controller="mainController">
-    <ion-nav-view></ion-nav-view>
+<body>
+    <ion-nav-view name="index.main"></ion-nav-view><!--这里加载的必须是个能管控很多路由的域路由 否则只能管理一个单路由-->
 </body>
 </html>

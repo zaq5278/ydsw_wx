@@ -1,38 +1,7 @@
 /**
  * Created by Administrator on 2016-3-14.
  */
-angular.module('myApp.mainController',[])
-    .config(function($stateProvider,$ionicConfigProvider) {
-        // $ionicConfigProvider.scrolling.jsScrolling(true);
-        $stateProvider
-            .state("login", {
-                templateUrl: "login.html"
-            })
-            .state('homePage',{
-                templateUrl: "homePage.html"
-            })
-            .state('punchTheClock',{
-                templateUrl: "punchTheClock.html"
-            })
-            .state('travelOnBusiness',{
-                templateUrl: "travelOnBusiness.html"
-            })
-            .state('askedForLeave',{
-                templateUrl: "askedForLeave.html"
-            })
-            .state('customerManagement',{
-                templateUrl:'customerManagement.html'
-            })
-            .state('customer_MenDianDetail',{
-                templateUrl:'customer_MenDianDetail.html'
-            })
-            .state('edit_menDianSummary',{
-                templateUrl:'edit_menDianSummary.html'
-            })
-            .state('customer_JxsDetail',{
-                templateUrl:'customer_JxsDetail.html'
-            })
-    }).controller('mainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal) {
+angular.module('myApp.mainController',[]).controller('mainController',['$scope','$state','$http','$ionicLoading','$ionicPopup','$timeout','$ionicHistory','$ionicModal','$location',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
     //判断访问浏览器的是安卓还是iOS
     // var ua = navigator.userAgent.toLowerCase();
     // if (/iphone|ipad|ipod/.test(ua)) {
@@ -73,7 +42,7 @@ angular.module('myApp.mainController',[])
     // });
 
     //设置首页
-    $state.go('login');
+    // $state.go('login');
 
     $scope.isMenDianOrJxsGuanLi = 'menDian';
     $scope.userName = 'zf04';
@@ -83,32 +52,29 @@ angular.module('myApp.mainController',[])
     if(localStorage.ydsw_userDetail){
         $scope.userDetail = JSON.parse(localStorage.ydsw_userDetail);
     }
+    var url = 'http://192.168.16.225:9999/synear/orderReceiptController.do?getWechatConfigureList'+ '&url=' + $location.absUrl() + '&callback=JSON_CALLBACK';
+    $http.jsonp(url).success(function (result) {
+        console.log(result);
+        if (result) {
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wx79476edda797a503', // 必填，公众号的唯一标识
+                timestamp: result.timestamp, // 必填，生成签名的时间戳
+                nonceStr: result.noncestr, // 必填，生成签名的随机串
+                signature: result.signature,// 必填，签名，见附录1
+                jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'openLocation', 'getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            wx.hideOptionMenu();
+            // $location.path('login');
+        }
+    }).error(function (error) {
+        $scope.promptShow("网络错误！");
+        $timeout(function () {
+            $scope.lodingHide();
+        }, 500);
+    });
     $scope.punchTheclockDetail = [];
-    window.onload = function () {
-        var url = 'http://222.88.22.72:100/orderReceiptController.do?getWechatConfigureList'+ '&url=' + window.location.href + '&callback=JSON_CALLBACK';
-        $http.jsonp(url).success(function (result) {
-            // console.log(result);
-            if (result.msgCode == "0002") {
-                // alert(result.msgDesc);
-                $state.go("login");
-            } else {
-                wx.config({
-                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                    appId: 'wx79476edda797a503', // 必填，公众号的唯一标识
-                    timestamp: result.timestamp, // 必填，生成签名的时间戳
-                    nonceStr: result.noncestr, // 必填，生成签名的随机串
-                    signature: result.signature,// 必填，签名，见附录1
-                    jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'openLocation', 'getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-                });
-                wx.hideOptionMenu();
-            }
-        }).error(function () {
-            $scope.promptShow("网络错误！");
-            $timeout(function () {
-                $scope.lodingHide();
-            }, 500);
-        });
-    };
+
 
 
     //返回首页
@@ -153,6 +119,7 @@ angular.module('myApp.mainController',[])
         if (str == 'travelOnBusiness'){
             $scope.getLocation_by_wx();
         }
+        // $location.path(str);
         $state.go(str);
     };
     //没有时间的日期选择框架
@@ -183,6 +150,8 @@ angular.module('myApp.mainController',[])
 
     //登录
     $scope.login = function (value) {
+        // $location.path('/index/homePage');
+
         $scope.lodingShow();
         var userName = document.getElementById("userName").value;
         var passWord = document.getElementById("passWord").value;
@@ -250,7 +219,7 @@ angular.module('myApp.mainController',[])
                         }else {
                             $scope.jxsYeWuYuanList = {rows:[{USERNAME:'无数据'}]};
                         }
-                        // console.log($scope.jxsYeWuYuanList);
+                        console.log($scope.jxsYeWuYuanList);
                         break;
                     case 'getProvince':
                         $scope.shengFenList = result;
@@ -261,7 +230,8 @@ angular.module('myApp.mainController',[])
             if ($scope.lianSuoList && $scope.quDaoList && $scope.buMenList && $scope.xiaoShouDaiBiaoList && $scope.suoShuJxsList && $scope.liHuoYuanList && $scope.jxsYeWuYuanList && $scope.shengFenList){
                 $scope.lodingHide();
                 // $state.go('edit_menDianSummary');
-                $state.go("homePage");
+                // $state.go("homePage");
+                $location.path('/homePage');
             }
         }).error(function () {
             $scope.promptShow("网络错误！");
@@ -815,7 +785,7 @@ angular.module('myApp.mainController',[])
         if ($scope.customer_MenDian.CUSTOMERID == undefined){
             $scope.customer_MenDian.CUSTOMERID = '';
         }
-        
+
         var countyId = '';//县区id
         var salesmanid = '';//销售代表id
         var dealerid = '';//所属经销商id
@@ -888,4 +858,4 @@ angular.module('myApp.mainController',[])
         });
         $scope.isAddNewMenDian = true;
     }
-});
+}]);
