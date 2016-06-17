@@ -147,7 +147,22 @@ angular.module('myApp.mainController',[]).controller('mainController',['$scope',
     //登录
     $scope.login = function (value) {
         // $location.path('/index/homePage');
-
+        // $http({
+        //     url: "http://192.168.16.151:8888/",
+        //     method: "POST",
+        //     dataType:'json',
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //     },
+        //     data: "ssss"
+        // }).success(function (result) {
+        //     console.log(result);
+        // }).error(function () {
+        //     $scope.promptShow("网络错误！");
+        //     $timeout(function () {
+        //         $scope.lodingHide();
+        //     }, 500);
+        // });
         $scope.lodingShow();
         var userName = document.getElementById("userName").value;
         var passWord = document.getElementById("passWord").value;

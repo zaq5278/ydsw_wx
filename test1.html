@@ -6,10 +6,11 @@
     <script type="text/javascript" src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
 
     <script  type="text/javascript" >
+
         $(document).ready( function(){
             $(".example1").on("click", function(event) {
                 event.preventDefault();
-                html2canvas(document.body, {
+                html2canvas(document.getElementById("myDiv"), {
                     allowTaint: true,
                     taintTest: false,
                     onrendered: function(canvas) {
@@ -17,6 +18,7 @@
                         //document.body.appendChild(canvas);
                         //生成base64图片数据
                         var dataUrl = canvas.toDataURL();
+
                         var newImg = document.createElement("img");
                         newImg.src =  dataUrl;
                         document.body.appendChild(newImg);
@@ -31,11 +33,13 @@
 <body>
 
 Hello!
-<div class="">
+<div class="" id="myDiv">
     html5页面截图
-</div>
+
 <textArea id="textArea" col="20" rows="10" ></textArea>
+</div>
 <input class="example1" type="button" value="button">
+
 生成界面如下：
 </body>
 </html>

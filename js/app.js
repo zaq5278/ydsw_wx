@@ -89,7 +89,7 @@ angular.module('myApp', ['ionic','myApp.mainController'])
                   templateUrl: "customer_JxsDetail.html"
               }
           }
-      })
+      });
   // .state('login',{
   //     templateUrl: "login.html"
   // })
