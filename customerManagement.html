@@ -29,9 +29,9 @@
         <i class="icon ion-search placeholder-icon"></i>
         <input id="customer_search" type="text" placeholder="搜索" ng-model="customer_search" ng-change="getShopOrJxsList('search')">
     </label>
-    <ion-content id="contentDiv" overflow-scroll='false' style="margin-top: 42px">
+    <ion-content delegate-handle="mainScroll" id="contentDiv" overflow-scroll='false' style="margin-top: 42px">
         <div ng-repeat="storeDetail in storeDetailList">
-            <a class="item item-thumbnail-left" ng-click="goToTheCustomerDetaill($index)">
+            <a class="item item-thumbnail-left" ng-click="goToCustomerDetaill_index($index)">
                 <img src="imges/mendian.png" style="width: 68px;height: 68px;margin-top: 5px;margin-bottom: 0">
                 <table style="width: 100%;margin-top: 5px;">
                     <tr>

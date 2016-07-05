@@ -1,0 +1,62 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<table class="title" style="border: double 1px white;border-radius: 5px;text-align: center">-->
+        <!--<tr style="text-align: center">-->
+        <!--<td><button class="button">门店管理</button></td>-->
+        <!--<td><button class="button">经销商管理</button></td>-->
+        <!--</tr>-->
+        <!--</table>-->
+        <div class="buttons tabs-assertive tabs-icon-only" style="border: double 1px white;width: 129px;height:35px;margin: 0 auto;border-radius: 5px;">
+
+            <!--<ion-tab class="buttons">-->
+            <button id="menDianGuanLiBtn" class="button button-light" style="font-size: 12px;border-radius: 0;color: red;padding: 0 2px 0 5px" ng-click="changeCustormerTabAndGetJxsList('2')">门店拜访</button>
+            <!--</ion-tab>-->
+
+            <!--<ion-tab>-->
+            <button id="jxsGuanLiBtn" class="button button-assertive" style="font-size: 12px;border-radius: 0;padding: 0 2px 0 5px" ng-click="changeCustormerTabAndGetJxsList('1')">经销商拜访</button>
+            <!--</ion-tab>-->
+
+        </div>
+    </ion-header-bar>
+    <div class="item item-input" style="width: 98%;margin: 0 auto;height: 35px;margin-top: 47px;border-left: none;border-right: none;border-top: none;">
+        <table style="width: 80%">
+            <tr>
+                <td><a class="button" style="background-color: #eeeeee;font-size: 15px;padding: 0 2px 0 2px;width: 100%;border-radius: 30px">{{GetDateStr(0).split('-')[1]+'月'+GetDateStr(0).split('-')[2]+'日'}}</a></td>
+                <td><a class="button" style="background-color: transparent;font-size: 15px;padding: 0 2px 0 2px;width: 100%;border-radius: 30px">{{GetDateStr(1).split('-')[1]+'月'+GetDateStr(1).split('-')[2]+'日'}}</a></td>
+                <td><a class="button" style="background-color: transparent;font-size: 15px;padding: 0 2px 0 2px;width: 100%;border-radius: 30px">{{GetDateStr(2).split('-')[1]+'月'+GetDateStr(2).split('-')[2]+'日'}}</a></td>
+            </tr>
+        </table>
+    </div>
+    <ion-content id="contentDiv" overflow-scroll='false' style="margin-top: 42px">
+
+        <div ng-repeat="storeDetail in storeDetailList">
+            <a class="item item-thumbnail-left" ng-click="goToTheCustomerDetaill($index)">
+                <img src="imges/mendian.png" style="width: 68px;height: 68px;margin-top: 5px;margin-bottom: 0">
+                <table style="width: 100%;margin-top: 5px;">
+                    <tr>
+                        <td style="margin-right: 15px">
+                            <div><span style="font-size: 15px">{{storeDetail.CUSTNAME}}</span></div>
+                            <div><span style="color: #6b6e75;font-size: 13px;margin-top: 3px">{{storeDetail.ADDRESS}}</span></div>
+                            <div style="font-size: 15px;margin-top: 3px;color:#6b6e75"><img src="imges/d-name.png" style="width: 15px;height: 18px"><span>{{storeDetail.LINKMAN}}</span><img src="imges/d-sj.png" style="width: 15px;height: 18px;margin-left: 20px"><span>{{storeDetail.TELEPHONE}}</span></div>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+        </div>
+        <ion-infinite-scroll id="myInfiniteScroll" on-infinite="loadMoreCustomer()" ng-if="isCustomerShowScroll" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="item item-input" style="position: fixed;bottom: 0;width: 101%;">
+        <div style="margin: 0 auto;font-size: 13px">
+            <span>总任务:{{}}</span>
+            <span>已完成:{{}}</span>
+            <span>未完成:{{}}</span>
+        </div>
+
+    </div>
+</ion-view>
+
