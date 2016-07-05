@@ -1,7 +1,7 @@
 /**
  * Created by zaq on 16/7/4.
  */
-angular.module('myApp.controllers',[]).controller('mainController',['$scope','$state','$http','$ionicLoading','$ionicPopup','$timeout','$ionicHistory','$ionicModal','$location','VisitTask','Login',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location,VisitTask,Login) {
+angular.module('myApp.controllers',[]).controller('mainController',['$scope','$state','$http','$ionicLoading','$ionicPopup','$timeout','$ionicHistory','$ionicModal','$location',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
     
     //返回首页
     $scope.goToMain = function () {

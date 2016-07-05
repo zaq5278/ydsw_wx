@@ -2,28 +2,17 @@
  * Created by zaq on 16/7/4.
  */
 angular.module('myApp.services',[])
-    
-    .factory('Login',function () {
+
+    .factory('SingleCase', function($http,$location,$ionicLoading,$timeout) {
+        var promptShow = function (str) {
+            $ionicLoading.show({
+                template: str,
+                noBackdrop: true
+            });
+        };
         return {
-            login: function() {
-                return "11s";
+            getVisitTaskSummary: function(visitdate) {
+                
             }
         };
-    })
-    .factory('VisitTask', function() {
-        return {
-            get: function() {
-                return "sss";
-            }
-        };
-    })
-    .factory('StoreDetailList', function($http,$ionicLoading) {
-        
-        var aa = '';
-    return {
-        get: function() {
-            $ionicLoading.show();
-            return aa;
-        }
-    };
-});
+    });
