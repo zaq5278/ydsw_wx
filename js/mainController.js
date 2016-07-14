@@ -1,8 +1,7 @@
 /**
  * Created by zaq on 16/7/4.
  */
-angular.module('myApp.controllers',[]).controller('mainController',['$scope','$state','$http','$ionicLoading','$ionicPopup','$timeout','$ionicHistory','$ionicModal','$location',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
-    
+angular.module('myApp.controllers',[]).controller('mainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
     //返回首页
     $scope.goToMain = function () {
         window.location.href = "";
@@ -135,35 +134,7 @@ angular.module('myApp.controllers',[]).controller('mainController',['$scope','$s
         });
     };
 
-    //调用微信拍照
-    $scope.openCamera = function () {
-        if($scope.travelCameraImg){
-            $scope.showAlert("您已经拍过照片了!");
-            return;
-        }
-        wx.chooseImage({
-            count: 1, // 默认9
-            sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success: function (res) {
-                var localIds = res.localIds;// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                $scope.travelCameraImg = localIds[localIds.length - 1];
-                document.getElementById("travelCameraImg").src = localIds[localIds.length - 1];
-                $timeout(function () {
-
-                });
-                $timeout(function () {
-                    wx.uploadImage({
-                        localId: localIds[localIds.length - 1], // 需要上传的图片的本地ID，由chooseImage接口获得
-                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                        success: function (res) {
-                            var serverId = res.serverId; // 返回图片的服务器端ID
-                        }
-                    });
-                }, 100);
-            }
-        })
-    };
+    
     //获取渠道连锁经销商等等固定的缓存数据
     $scope.getMenDianOtherSummary = function (url) {
         var URL = myUrl + "app/" + url +".appjsonp?sessionid="+ JSON.parse(localStorage.ydsw_userDetail).sessionid + "&page=1&rows=200" + '&callback=JSON_CALLBACK';
@@ -251,4 +222,4 @@ angular.module('myApp.controllers',[]).controller('mainController',['$scope','$s
             }, 500);
         })
     };
-}]);
+});

@@ -1,0 +1,49 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
+        <h1 class="title" style="text-align: center">{{visitTask_Detail.CUSTNAME}}</h1>
+
+        <!--<div class="buttons">-->
+            <!--<button class="button icon ion-checkmark" ng-click="">提交</button>-->
+        <!--</div>-->
+    </ion-header-bar>
+
+    <ion-content>
+        <div style="background-color: #eeeeee"><span style="margin: 10px 10px 10px 10px">{{visitTask_Detail.CUSTNAME}}</span></div>
+        <div class="list">
+            <label class="item" style="height: 48px">
+                <span>地址</span>
+                <span style="float: right">{{visitTask_Detail.ADDRESS}}</span>
+            </label>
+            <label class="item" style="height: 48px">
+                <span>联系人</span>
+                <span style="float: right">{{visitTask_Detail.LINKMAN}}</span>
+            </label>
+            <label class="item" style="height: 48px">
+                <span>联系电话</span>
+                <span style="float: right">{{visitTask_Detail.MOBILE}}</span>
+            </label>
+        </div>
+        <div style="background-color: #eeeeee;margin-top: -20px"><span style="margin: 10px 10px 10px 10px">拜访信息</span></div>
+        <div class="list">
+            <label class="item" style="height: 48px">
+                <span>应收账款</span>
+                <span style="float: right">{{visitTask_Detail.DEBTRECEIVABLE}}</span>
+            </label>
+            <label class="item" style="height: 48px">
+                <span>本月完成</span>
+                <span style="float: right">{{visitTask_Detail.FINISH}}</span>
+            </label>
+            <label class="item" style="height: 48px">
+                <span>拜访频率</span>
+                <span style="float: right">{{visitTask_Detail.FREQUENCY}}</span>
+            </label>
+        </div>
+        <div style="text-align: center;margin-top: 100px"><button class="button button-assertive" style="width: 95%" ng-click="goToTheJobTaskView()">{{visitFstatus}}</button></div>
+    </ion-content>
+
+</ion-view>

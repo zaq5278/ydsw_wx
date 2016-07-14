@@ -155,9 +155,9 @@ angular.module('myApp.controllers').controller('customerManagerController',funct
     //点击cell进行跳转
     $scope.goToCustomerDetaill_index = function (index) {
         if ($scope.customerTab == '2'){
-            $location.path('/customer_MenDianDetail'+ $scope.storeDetailList[index].CUSTOMERID + $scope.customerTab);
+            $location.path('/customer_MenDianDetail/'+ $scope.storeDetailList[index].CUSTOMERID + $scope.customerTab);
         }else {
-            $location.path('/customer_JxsDetail'+ $scope.storeDetailList[index].CUSTOMERID + $scope.customerTab);
+            $location.path('/customer_JxsDetail/'+ $scope.storeDetailList[index].CUSTOMERID + $scope.customerTab);
         }
 
     };

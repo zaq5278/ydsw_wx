@@ -75,7 +75,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
           }
       })
       .state("customer_MenDianDetail", {
-          url: '/customer_MenDianDetail:customer_ManagerDetail_CUSTOMERID',
+          url: '/customer_MenDianDetail/:customer_ManagerDetail_CUSTOMERID',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "customer_MenDianDetail.html",
@@ -93,7 +93,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
           }
       })
       .state("customer_JxsDetail", {
-          url: '/customer_JxsDetail:customer_ManagerDetail_CUSTOMERID',
+          url: '/customer_JxsDetail/:customer_ManagerDetail_CUSTOMERID',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "customer_JxsDetail.html",
@@ -108,6 +108,26 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "customerVisit.html",
                   controller:'customerVisitController'
+              }
+          }
+      })
+      //门店或者经销商拜访的第一个页面详情
+      .state('menDianSummary_visit', {
+          url: '/menDianSummary_visit/:customerid',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "menDianSummary_visit.html",
+                  controller:'visitTaskSummarryController'
+              }
+          }
+      })
+      //拜访任务步骤页面 8 或者 5
+      .state('jobTask_Main', {
+          url: '/jobTask_Main',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "jobTask_Main.html",
+                  controller:'jobTask_MainController'
               }
           }
       });
@@ -143,7 +163,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
 });
 // var myUrl_47 = 'http://222.88.22.72:100/userServiceController.do?';
 // var myUrl = "http://100.100.1.55:8080/synear/";
-//var myUrl = "http://171.8.66.195:8080/synear/";
+var myUrl = "http://171.8.66.195:8080/synear/";
 // var myUrl = 'http://100.100.1.46:9999/';
-var myUrl = "http://192.168.16.176:9999/synear/";
+//var myUrl = "http://192.168.16.176:9999/synear/";
 

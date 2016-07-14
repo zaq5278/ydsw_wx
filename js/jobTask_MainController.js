@@ -1,12 +1,11 @@
 /**
- * Created by zaq on 16/7/5.
+ * Created by zaq on 16/7/11.
  */
-angular.module('myApp.controllers').controller('travelController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
-    //提交差旅请求
 
+angular.module('myApp.controllers').controller('jobTask_MainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
     //调用微信拍照
-    $scope.openCamera = function () {
-        if($scope.travelCameraImg){
+    $scope.openCamera_jobTask = function (str) {
+        if($scope.isFinishPaiZhao){
             $scope.showAlert("您已经拍过照了!");
             return;
         }
@@ -17,8 +16,7 @@ angular.module('myApp.controllers').controller('travelController',function($scop
             success: function (res) {
                 var localIds = res.localIds;// 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 var localId = localIds[localIds.length - 1];
-                $scope.travelCameraImg = true;
-                document.getElementById("travelCameraImg").src = localId;
+                $scope.isFinishPaiZhao = true;
                 $timeout(function () {
                     wx.uploadImage({
                         localId: localIds[localIds.length - 1], // 需要上传的图片的本地ID，由chooseImage接口获得
@@ -28,8 +26,10 @@ angular.module('myApp.controllers').controller('travelController',function($scop
                         }
                     });
                 }, 100);
-                return localId;
             }
-        })
+        });
+        if($scope.isFinishPaiZhao){
+            return true;
+        }
     };
 });
