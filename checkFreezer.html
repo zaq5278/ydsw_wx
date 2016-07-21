@@ -1,0 +1,31 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+        <h1 class="title" style="text-align: center">冰柜检查</h1>
+        <div class="buttons">
+            <button class="button" ng-click="">下一步</button>
+        </div>
+    </ion-header-bar>
+    <ion-content overflow-scroll='false'>
+        <div ng-repeat="storeDetail in storeDetailList">
+            <a class="item item-thumbnail-left" ng-click="goToCustomerDetaill_index($index)">
+                <img src="imges/mendian.png" style="width: 68px;height: 68px;margin-top: 5px;margin-bottom: 0">
+                <table style="width: 100%;margin-top: 5px;">
+                    <tr>
+                        <td style="margin-right: 15px">
+                            <div><span style="font-size: 15px">{{storeDetail.CUSTNAME}}</span></div>
+                            <div><span style="color: #6b6e75;font-size: 13px;margin-top: 3px">{{storeDetail.ADDRESS}}</span></div>
+                            <div style="font-size: 15px;margin-top: 3px;color:#6b6e75"><img src="imges/d-name.png" style="width: 15px;height: 18px"><span>{{storeDetail.LINKMAN}}</span><img src="imges/d-sj.png" style="width: 15px;height: 18px;margin-left: 20px"><span>{{storeDetail.TELEPHONE}}</span></div>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+        </div>
+    </ion-content>
+    <div class="item-input" style="position: fixed;bottom: 2px;width: 100%;padding: 0 0 0 0">
+        <button class="button button-assertive button-small" style="width: 46%;margin-left: 2%">扫描</button>
+        <button class="button button-assertive button-small" style="width: 46%;margin-left: 4%">添加</button>
+    </div>
+</ion-view>

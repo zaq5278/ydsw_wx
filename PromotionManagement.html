@@ -1,0 +1,44 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
+        <h1 class="title" style="text-align: center">促销员管理</h1>
+
+        <div class="buttons">
+            <button class="button" ng-click="">下一步</button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">长促姓名：</span>
+                <input placeholder="请输入长促姓名" type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">临促姓名：</span>
+                <input placeholder="请输入临促姓名" type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">长促数量：</span>
+                <input placeholder="请输入长促数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">临促数量：</span>
+                <input placeholder="请输入临促数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">促销员拍照：</span>
+                <button class="button ion ion-android-add"></button>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">备注：</span>
+                <input placeholder="请输入内容" type="text">
+            </label>
+        </div>
+    </ion-content>
+
+</ion-view>

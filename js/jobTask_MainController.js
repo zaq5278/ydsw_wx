@@ -2,7 +2,13 @@
  * Created by zaq on 16/7/11.
  */
 
-angular.module('myApp.controllers').controller('jobTask_MainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
+angular.module('myApp.controllers').controller('jobTask_MainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location,$stateParams) {
+
+    if($stateParams.visitTab == 2){
+        $scope.isMDOrJxs =  true;
+    }else {
+        $scope.isMDOrJxs =  false;
+    }
     //调用微信拍照
     $scope.openCamera_jobTask = function (str) {
         if($scope.isFinishPaiZhao){

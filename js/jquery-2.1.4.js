@@ -11,7 +11,8 @@
  *
  * Date: 2015-04-28T16:01Z
  */
-var myUrl = 'http://192.168.16.225:9999/';
+//var myUrl = 'http://192.168.16.225:9999/';
+var myUrl = "http://171.8.66.195:8080/";
 // var myUrl = 'http://vpn.synear.cn:9090/';
 // var myUrl = 'http://100.100.1.46:9999/';
 // var myUrl = 'http://192.168.18.111:9999/';

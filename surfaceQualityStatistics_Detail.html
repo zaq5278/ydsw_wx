@@ -1,0 +1,56 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
+        <h1 class="title" style="text-align: center">{{}}</h1>
+
+        <div class="buttons">
+            <button class="button ion ion-checkmark" ng-click="">保存</button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">思念排面数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">思念品项数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">三全排面数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">三全品项数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">湾仔排面数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">湾仔品项数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">其他竞品名称：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">其他竞品排面数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">其他竞品品项数：</span>
+                <input placeholder="请输入数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+            </label>
+        </div>
+    </ion-content>
+
+</ion-view>

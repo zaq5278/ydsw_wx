@@ -2,12 +2,14 @@
  * Created by zaq on 16/7/4.
  */
 angular.module('myApp.controllers',[]).controller('mainController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location) {
+    $scope.storeDetailList = [];
+    $scope.userName = 'zf04';
+    $scope.passWord = '778899';
     //返回首页
     $scope.goToMain = function () {
         window.location.href = "";
     };
     $scope.goBackView = function () {
-        // window.history.go(-1);
         $ionicHistory.goBack();
     };
     $scope.goBackHtmlView = function () {
@@ -88,9 +90,7 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
     if(localStorage.ydsw_userDetail){
         $scope.userDetail = JSON.parse(localStorage.ydsw_userDetail);
     }
-    $scope.storeDetailList = [];
-    $scope.userName = 'zf04';
-    $scope.passWord = '778899';
+
     //获取位置信息
     $scope.getLocation_by_wx = function (str) {
         // var baidu_url = "http://api.map.baidu.com/geoconv/v1/?coords=" + '113.6542,34.86024' + "&ak=uCgec5YyeCeFkPLILZLS2guLOraELess&output=json" + '&callback=JSON_CALLBACK';
@@ -200,7 +200,6 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
         if (type == 'getCounty'){
             url = myUrl + "app/" + type + ".appjson?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&province=" + shengFen + "&city=" + shiQu + '&callback=JSON_CALLBACK';
         }
-
         $http.jsonp(url).success(function (result) {
             $scope.lodingHide();
             // console.log(result);
@@ -213,7 +212,6 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
                 if (type == 'getCounty'){
                     $scope.xianQuList = result;
                 }
-
             }
         }).error(function () {
             $scope.promptShow("网络错误！");
@@ -222,4 +220,5 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
             }, 500);
         })
     };
+
 });

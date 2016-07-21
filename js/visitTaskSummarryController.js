@@ -2,8 +2,7 @@
  * Created by zaq on 16/7/11.
  */
 angular.module('myApp.controllers').controller('visitTaskSummarryController',function($scope,$state,$http,$ionicLoading,$ionicPopup,$timeout,$ionicHistory,$ionicModal,$location,$stateParams) {
-    $scope.storeTab = 1;
-    if($scope.storeTab == 1){
+    if($stateParams.visitTab == 2){
         var lenget = "getCustomerInfoApp.appjson";//门店
     }else{
         var lenget = "getVisitJxsInfo.appjson";//经销商
@@ -36,6 +35,6 @@ angular.module('myApp.controllers').controller('visitTaskSummarryController',fun
         }, 500);
     });
     $scope.goToTheJobTaskView = function () {
-        $location.path("/jobTask_Main");
+        $location.path("/jobTask_Main/" + $stateParams.visitTab);
     }
 });

@@ -13,44 +13,84 @@
     </ion-header-bar>
 
     <ion-content>
-        <div class="list">
+        <div class="list" ng-show="isMDOrJxs">
             <a class="item item-icon-left" ng-click="openCamera_jobTask('menTouPaiZhao')">
                 <img class="icon" src="imges/icon-photo.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 门头拍照
+                <span style="color: red">*</span>
                 <span ng-show="!isFinishPaiZhao" class="badge assertive">未完成</span>
                 <span ng-show="isFinishPaiZhao" class="badge balanced">已完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/storeProblemExecutionFeedback">
                 <img class="icon" src="imges/icon-zxfk.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 店内执行反馈
+                <span style="color: red">*</span>
                 <span class="badge assertive">未完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/promotionManagement">
                 <img class="icon" src="imges/icon-cxygl.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 促销员管理
                 <span class="badge assertive">未完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/storeProblemFeedback">
                 <img class="icon" src="imges/icon-dnwt.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 店内问题反馈
                 <span class="badge assertive">未完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/inventory_MenDian">
                 <img class="icon" src="imges/icon-kcpd.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 库存盘点
                 <span class="badge assertive">未完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/surfaceQualityStatistics">
                 <img class="icon" src="imges/icon-pmpx.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 排面品项统计
+                <span style="color: red">*</span>
                 <span class="badge assertive">未完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/checkFreezer">
                 <img class="icon" src="imges/icon-bgjc.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 冰柜检查
                 <span class="badge assertive">未完成</span>
             </a>
-            <a class="item item-icon-left">
+            <a class="item item-icon-left" href="#/visitSummary">
+                <img class="icon" src="imges/icon-bfxj.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
+                拜访小结
+                <span class="badge assertive">未完成</span>
+            </a>
+        </div>
+        <div class="list" ng-show="!isMDOrJxs">
+            <a class="item item-icon-left" ng-click="openCamera_jobTask('menTouPaiZhao')">
+                <img class="icon" src="imges/icon-photo.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
+                门头拍照
+                <span style="color: red">*</span>
+                <span ng-show="!isFinishPaiZhao" class="badge assertive">未完成</span>
+                <span ng-show="isFinishPaiZhao" class="badge balanced">已完成</span>
+            </a>
+            <a class="item item-icon-left" href="#/visitChatPhotos">
+                <img class="icon" src="imges/icon-jtphoto.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
+                拜访交谈照片
+                <span style="color: red">*</span>
+                <span class="badge assertive">未完成</span>
+            </a>
+            <a class="item item-icon-left" href="#/communicationRecord">
+                <img class="icon" src="imges/icon-gtjl.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
+                沟通记录
+                <span class="badge assertive">未完成</span>
+            </a>
+            <a class="item item-icon-left" href="#/stockClassification">
+                <img class="icon" src="imges/icon-dnwt.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
+                库存量(件)
+                <span style="color: red">*</span>
+                <span class="badge assertive">未完成</span>
+            </a>
+            <a class="item item-icon-left" href="#/stockRealPhotos">
+                <img class="icon" src="imges/icon-kcsj.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
+                库存实景
+                <span style="color: red">*</span>
+                <span class="badge assertive">未完成</span>
+            </a>
+            <a class="item item-icon-left" href="#/visitSummary">
                 <img class="icon" src="imges/icon-bfxj.png" style="width: 35px;height: 35px;margin: 10px 0 0 0">
                 拜访小结
                 <span class="badge assertive">未完成</span>

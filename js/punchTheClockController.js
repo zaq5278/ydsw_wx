@@ -6,7 +6,7 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
 
     $scope.punchTheclockDetail = [];
     //获取位置信息
-    $scope.getLocation_by_wx = function (str) {
+    $scope.getLocation_by_wx_self = function (str) {
         $scope.lodingShow();
         // var baidu_url = "http://api.map.baidu.com/geoconv/v1/?coords=" + '113.6542,34.86024' + "&ak=uCgec5YyeCeFkPLILZLS2guLOraELess&output=json" + '&callback=JSON_CALLBACK';
         // $http.jsonp(baidu_url).success(function (data) {
@@ -28,8 +28,8 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
                 // var accuracy = res.accuracy; // 位置精度
                 // var point = new BMap.Point(parseFloat(longitude), parseFloat(latitude));
                 // var point = new BMap.Point(113.654144,34.860686);
-                $scope.clickLongitude = longitude - 0.008774687519;//存放提交的时候的经度
-                $scope.clickLatitude = latitude + 0.00374531687912;//存放提交的时候的纬度
+                $scope.clickLongitude = parseFloat(longitude) - 0.008774687519;//存放提交的时候的经度
+                $scope.clickLatitude = parseFloat(latitude) + 0.00374531687912;//存放提交的时候的纬度
                 var point = new BMap.Point(parseFloat($scope.clickLongitude), parseFloat($scope.clickLatitude));
                 var gc = new BMap.Geocoder();
                 gc.getLocation(point, function (rs) {
@@ -79,6 +79,7 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
             if (result.msgCode == "0001"){
                 $scope.punchTheclockDetail = result.rows;
                 // console.log(result);
+
                 $location.path('/punchTheClock');
             }else {
                 if (result.msgCode == "0002"){
@@ -93,7 +94,10 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
             }, 500);
         })
     };
-    $scope.goToThePunchTheClockView();
+    $timeout(function () {
+        $scope.goToThePunchTheClockView();
+    }, 500);
+
     //加载打卡详细信息动态获取需要的数据
     $scope.getTheClockSummary = function (clockDate,type,index) {
         for (var i = 0;i < $scope.punchTheclockDetail.length;i++){
@@ -136,10 +140,10 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
         var dTime = h + ":" + m + ":" + s;
         var url = myUrl + "app/addWork.appjsonc?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&dtime=" + dTime + "&longitude=" + longitude + "&latitude=" + latitude + "&address=" + address + "&shortaddr=" + address + '&callback=JSON_CALLBACK';
         $http.jsonp(url).success(function (result) {
-            $scope.lodingHide();
             if (result.msgCode == "0001"){
                 // console.log(result);
                 $scope.goToThePunchTheClockView();
+
             }else {
                 if (result.msgCode == "0002"){
                     alert(result.msgDesc);

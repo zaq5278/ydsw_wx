@@ -1,0 +1,47 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+
+        <!--<table class="title" style="border: double 1px white;border-radius: 5px;text-align: center">-->
+        <!--<tr style="text-align: center">-->
+        <!--<td><button class="button">门店管理</button></td>-->
+        <!--<td><button class="button">经销商管理</button></td>-->
+        <!--</tr>-->
+        <!--</table>-->
+        <h1 class="title" style="text-align: center">库存盘点</h1>
+        <div class="buttons">
+            <button  class="button" ng-click="">下一步</button>
+        </div>
+    </ion-header-bar>
+    <label class="item item-input" style="width: 98%;margin: 0 auto;border-radius: 30px;height: 35px;margin-top: 47px;">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input id="customer_search" type="text" placeholder="搜索" ng-model="product_search" ng-change="searchProductFormList('search')">
+    </label>
+    <ion-content delegate-handle="productScroll" id="contentDiv" overflow-scroll='false' style="margin-top: 42px">
+        <div ng-repeat="productDetail in productList">
+            <a class="item" ng-click="goToCustomerDetaill_index($index)" href="#/inventory_Detail">
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <div>
+                                <span style="font-size: 15px">{{productDetail.PRODUCTNAME}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="color: #228B22;font-size: 13px;margin-top: 10px">
+                                <span>品牌:{{productDetail.BRAND}}</span>
+                                <span style="margin-left: 10px">类别:{{productDetail.ITEMTYPENAME}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+        </div>
+        <ion-infinite-scroll on-infinite="getTheProductList()" ng-if="isProductListShowScroll" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</ion-view>
