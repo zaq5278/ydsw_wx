@@ -1,0 +1,55 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+        <h1 class="title" style="text-align: center">培训</h1>
+        <div class="buttons">
+            <button ng-show="false" class="button" ng-click="">占位</button>
+        </div>
+    </ion-header-bar>
+
+    <ion-content ng-show="train_detail.btnType == '常见问题'" style="margin-left: 15px">
+        <h4>{{train_detail.summary.PROBLEMNAME}}</h4>
+        <span>类型:{{train_detail.summary.PROBLEMTYPE}}</span>
+        <div style="margin-top: 5px">关键字:{{train_detail.summary.KEYWORD}}</div>
+        <div style="margin-top: 5px">附件:<a href="" download="train_detail.summary.ATTACHMENT">{{train_detail.summary.ATTACHMENT}}</a></div>
+        <div style="margin-top: 5px">时间:{{train_detail.summary.PDATE}}</div>
+        <div style="margin-top: 10px;">{{train_detail.summary.PROBLEM}}</div>
+    </ion-content>
+    <ion-content ng-show="train_detail.btnType == '产品资料'" style="margin-left: 15px">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">{{train_detail.productDetail.PRODUCTNAME}}</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label" style="color: #6b6b6b">产品编号：</span>
+                <span>{{train_detail.productDetail.PRODUCTCODE}}</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label" style="color: #6b6b6b">类别：</span>
+                <span>{{train_detail.productDetail.ITEMTYPENAME}}</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label" style="color: #6b6b6b">品牌：</span>
+                <span>{{train_detail.productDetail.BRAND}}</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label" style="color: #6b6b6b">单品单位：</span>
+                <span>{{train_detail.productDetail.STAUNITDESC}}</span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label" style="color: #6b6b6b">单品条码：</span>
+                <span>{{train_detail.productDetail.BARCODE}}</span>
+            </label>
+        </div>
+    </ion-content>
+    <ion-content ng-show="train_detail.btnType == '培训资料'" style="margin-left: 15px">
+        <h4>{{train_detail.summary.BRAND}}</h4>
+        <span>类型:{{train_detail.summary.FTYPE}}</span>
+        <div style="margin-top: 5px">关键字:{{train_detail.summary.KEYWORD}}</div>
+        <div style="margin-top: 5px">附件:<a href="" download="train_detail.summary.ATTACHMENT">{{train_detail.summary.ATTACHMENT}}</a></div>
+        <div style="margin-top: 5px">时间:{{train_detail.summary.DDATE}}</div>
+        <div style="margin-top: 10px;">{{train_detail.summary.DOCUMENT}}</div>
+    </ion-content>
+</ion-view>

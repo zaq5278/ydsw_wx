@@ -35,7 +35,7 @@ angular.module('myApp.controllers').controller('inventory_MenDianController',fun
                 }else {
                     $scope.isProductListShowScroll = true;
                 }
-                console.log("ss");
+                //console.log("ss");
 
                 $scope.pageNum += 1;
             }

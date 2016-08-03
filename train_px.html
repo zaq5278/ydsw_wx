@@ -1,0 +1,49 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+        <h1 class="title" style="text-align: center">培训</h1>
+        <div class="buttons">
+            <button ng-show="false" class="button" ng-click="">占位</button>
+        </div>
+    </ion-header-bar>
+    <div class="item item-input" style="width: 100%;margin: 0 auto;height: 35px;margin-top: 47px;border: none">
+        <table style="width: 100%;text-align: center">
+            <tr>
+                <td><a class="button button-clear button-assertive" ng-click="train.changeType('常见问题')">常见问题</a></td>
+                <td><a class="button button-clear button-assertive" ng-click="train.changeType('产品资料')">产品资料</a></td>
+                <td><a class="button button-clear button-assertive" ng-click="train.changeType('培训资料')">培训资料</a></td>
+            </tr>
+        </table>
+    </div>
+    <div style="{{train.lineStyle}}"></div>
+    <label class="item item-input" style="width: 98%;margin: 0 auto;border-radius: 30px;height: 35px;margin-top: 5px">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input id="customer_search" type="text" placeholder="搜索" ng-model="train.searchStr" ng-change="train.getTrainList('search')">
+    </label>
+    <ion-content delegate-handle="train_px" overflow-scroll='false' style="margin-top: 85px">
+        <ion-item ng-show="train.btnType == '常见问题'" class="item-icon-right" ng-repeat="trainDetail in train.trainList" ng-click="train.goToTrainDetail($index)">
+            <h3>{{trainDetail.PROBLEMNAME}}</h3>
+            <div ng-style="train.trainStyle">关键字:{{trainDetail.KEYWORD}}</div>
+            <div ng-style="train.trainStyle">时间:{{trainDetail.PDATE}}</div>
+            <i class="icon ion-ios-arrow-right" style="color: #cccccc"></i>
+        </ion-item>
+        <ion-item ng-show="train.btnType == '产品资料'" class="item-icon-right" ng-repeat="trainDetail in train.trainList" ng-click="train.goToTrainDetail($index)">
+            <span class="item-text-wrap">{{trainDetail.PRODUCTNAME}}</span>
+            <div style="color: #28a54c;font-size: small;margin-top: 5px">品牌:{{trainDetail.BRAND}}</div>
+            <div style="font-size: small;margin-top: 5px">时间:{{trainDetail.ITEMTYPENAME}}</div>
+            <i class="icon ion-ios-arrow-right" style="color: #cccccc"></i>
+        </ion-item>
+        <ion-item ng-show="train.btnType == '培训资料'" class="item-icon-right" ng-repeat="trainDetail in train.trainList" ng-click="train.goToTrainDetail($index)">
+            <h3>{{trainDetail.BRAND}}</h3>
+            <div style="color: #28a54c;;font-size: small">关键字:{{trainDetail.DOCUMENT}}</div>
+            <div style="color: #28a54c;font-size: small">时间:{{trainDetail.DDATE}}</div>
+            <i class="icon ion-ios-arrow-right" style="color: #cccccc"></i>
+        </ion-item>
+        <ion-infinite-scroll style="margin-left: -25px;" on-infinite="train.getTrainList()" ng-if="train.isTrainShowScroll" distance="1%">
+        </ion-infinite-scroll>
+        <span style="position: fixed;bottom: 22px;width: 100%;text-align: center;margin-left: 20px" ng-if="train.isTrainShowScroll">加载中...</span>
+    </ion-content>
+</ion-view>
+

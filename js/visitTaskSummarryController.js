@@ -18,8 +18,11 @@ angular.module('myApp.controllers').controller('visitTaskSummarryController',fun
                 $scope.visitFstatus = localStorage.getItem($scope.visitTask_Detail.CUSTOMERID + 'visitFstatus');
             }
             if(result.msgCode == "0002"){
-                alert(result.msgDesc);
-                $location.path('/login');
+                $scope.promptShow(result.msgDesc);
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    $location.path('/login');
+                }, 800);
             }
             if(result.msgCode == "0003"){
                 $scope.promptShow(result.msgDesc);
@@ -31,10 +34,13 @@ angular.module('myApp.controllers').controller('visitTaskSummarryController',fun
     }).error(function (error) {
         $scope.promptShow("网络错误！");
         $timeout(function () {
-            lodingHide();
+            $scope.lodingHide();
         }, 500);
     });
     $scope.goToTheJobTaskView = function () {
-        $location.path("/jobTask_Main/" + $stateParams.visitTab);
+        if(localStorage.getItem($scope.visitTask_Detail.CUSTOMERID + 'visitFstatus') != '查看拜访信息'){
+            localStorage.setItem($scope.visitTask_Detail.CUSTOMERID + 'visitFstatus','继续拜访');
+        }
+        $location.path("/jobTask_Main/" + $stateParams.visitTab + "/" + $scope.visitTask_Detail.CUSTOMERID + "/" + $stateParams.VISITINGTASKDATAID);
     }
 });

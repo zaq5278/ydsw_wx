@@ -8,7 +8,7 @@
         <h1 class="title" style="text-align: center">促销员管理</h1>
 
         <div class="buttons">
-            <button class="button" ng-click="">下一步</button>
+            <button class="button" ng-click="saveAndNext()">下一步</button>
         </div>
     </ion-header-bar>
 
@@ -16,27 +16,28 @@
         <div class="list">
             <label class="item item-input">
                 <span class="input-label">长促姓名：</span>
-                <input placeholder="请输入长促姓名" type="text">
+                <input placeholder="请输入长促姓名" type="text" ng-model="salesPromotion.cc_name">
             </label>
             <label class="item item-input">
                 <span class="input-label">临促姓名：</span>
-                <input placeholder="请输入临促姓名" type="text">
+                <input placeholder="请输入临促姓名" type="text" ng-model="salesPromotion.lc_name">
             </label>
             <label class="item item-input">
                 <span class="input-label">长促数量：</span>
-                <input placeholder="请输入长促数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+                <input placeholder="请输入长促数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}" ng-model="salesPromotion.cc_num">
             </label>
             <label class="item item-input">
                 <span class="input-label">临促数量：</span>
-                <input placeholder="请输入临促数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}">
+                <input placeholder="请输入临促数量" type="tel" onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}" ng-model="salesPromotion.lc_num">
             </label>
-            <label class="item item-input">
-                <span class="input-label">促销员拍照：</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
+            <div class="row-wrap" style="padding-bottom: 10px">
+                <span class="input-label" style="margin-left: 10px">促销员拍照：</span>
+                <label id="cxypz"></label>
+                <button class="button ion ion-android-add" ng-click="openCamera_CXYGL('cxypz')" style="margin-left: 10px"></button>
+            </div>
             <label class="item item-input">
                 <span class="input-label">备注：</span>
-                <input placeholder="请输入内容" type="text">
+                <input placeholder="请输入内容" type="text" ng-model="salesPromotion.remarks">
             </label>
         </div>
     </ion-content>

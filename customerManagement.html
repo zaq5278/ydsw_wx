@@ -44,8 +44,9 @@
                 </table>
             </a>
         </div>
-        <ion-infinite-scroll id="myInfiniteScroll" on-infinite="loadMoreCustomer()" ng-if="isCustomerShowScroll" distance="1%">
+        <ion-infinite-scroll style="margin-left: -25px;" id="myInfiniteScroll" on-infinite="loadMoreCustomer()" ng-if="isCustomerShowScroll" distance="1%">
         </ion-infinite-scroll>
+        <span style="position: fixed;bottom: 22px;width: 100%;text-align: center;margin-left: 20px" ng-if="isCustomerShowScroll">加载中...</span>
     </ion-content>
 </ion-view>
 

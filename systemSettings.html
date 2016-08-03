@@ -1,0 +1,27 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+        <h1 class="title" style="text-align: center">系统设置</h1>
+
+        <div class="buttons">
+            <button ng-show="false" class="button" ng-click="">占位钮</button>
+        </div>
+    </ion-header-bar>
+    <ion-content delegate-handle="mainScroll" id="contentDiv" overflow-scroll='false'>
+        <ion-item class="item-icon-right" ng-click="sysSet.getNetworkType()">
+            网络状态
+            <i class="icon ion-ios-arrow-right" style="color: #cccccc"></i>
+        </ion-item>
+        <ion-item class="item-icon-right" ng-click="sysSet.modifyPassWord()">
+            修改密码
+            <i class="icon ion-ios-arrow-right" style="color: #cccccc"></i>
+        </ion-item>
+        <a class="item item-icon-right" href="#/aboutUs">
+            <span style="color: #4d4d4d">关于我们</span>
+            <i class="icon ion-ios-arrow-right" style="color: #cccccc"></i>
+        </a>
+    </ion-content>
+</ion-view>
+

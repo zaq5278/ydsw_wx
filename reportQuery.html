@@ -1,0 +1,45 @@
+<ion-view>
+    <ion-header-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button icon ion-arrow-left-c" ng-click="goBackView()">返回</button>
+        </div>
+        <h1 class="title" style="text-align: center">报表查询</h1>
+        <div class="buttons">
+        </div>
+    </ion-header-bar>
+    <div class="item item-input" style="width: 100%;margin: 0 auto;height: 35px;margin-top: 47px;border: none">
+        <table style="width: 100%;text-align: center">
+            <tr>
+                <td><a class="button button-clear button-assertive" ng-click="report.changeType('图形')">图形</a></td>
+                <td><a class="button button-clear button-assertive" ng-click="report.changeType('数据')">数据</a></td>
+            </tr>
+        </table>
+    </div>
+    <div style="{{report.lineStyle}}"></div>
+    <ion-content overflow-scroll='false' style="margin-top: 48px">
+        <div ng-show="report.isShowTuXing">
+            <canvas id="pie" class="chart chart-pie"
+                    chart-data="report.pieData" chart-labels="report.labels" chart-options="report.options">
+            </canvas>
+            <canvas id="bar" class="chart chart-bar" chart-data="report.barData" chart-labels="report.labels" chart-series="report.series" chart-options="report.options">
+            </canvas>
+        </div>
+        <div style="border: double 1px #ef473a;width: 90%;margin: 0 auto" ng-show="!report.isShowTuXing">
+            <div class="row" style="margin-left: -3%;text-align: center;width: 106%;color: white">
+                <div class="col-25 assertive-bg">日期</div>
+                <div class="col-25" style="background-color: #e42112">总数量</div>
+                <div class="col-25 assertive-bg">已拜访</div>
+                <div class="col-25" style="background-color: #e42112">拜访达成</div>
+            </div>
+            <div ng-repeat="reportDetail in report.reportDetailArray">
+                <div class="row" style="margin-left: -3%;text-align: center;width: 106%">
+                    <div class="col-25">{{reportDetail.VISITDATE}}</div>
+                    <div class="col-25">{{reportDetail.ALLNUM}}</div>
+                    <div class="col-25">{{reportDetail.HAVENUM}}</div>
+                    <div class="col-25">{{(reportDetail.FINISH | limitTo:5) * 100 + "%"}}</div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+

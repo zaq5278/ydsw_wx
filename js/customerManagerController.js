@@ -49,7 +49,7 @@ angular.module('myApp.controllers').controller('customerManagerController',funct
     //获得门店或者经销商管理的数据
     $scope.getShopOrJxsList = function (str) {
 
-        $scope.lodingShow();
+        $scope.lodingShow("加载中...");
         $scope.isCustomerShowScroll = false;//初始化下拉刷新
         $scope.storeDetailList = [];//初始化接受客户管理的数据数组
         $scope.customerPage = 1;//初始化页数
@@ -79,7 +79,11 @@ angular.module('myApp.controllers').controller('customerManagerController',funct
                     $scope.lodingHide();
                 }, 500);
                 if(result.msgCode == '0002'){
-                    $location.path('/login');
+                    $scope.promptShow(result.msgDesc);
+                    $timeout(function () {
+                        $ionicLoading.hide();
+                        $location.path('/login');
+                    }, 800);
                 }
             }
         }).error(function () {
@@ -139,7 +143,11 @@ angular.module('myApp.controllers').controller('customerManagerController',funct
                             $scope.lodingHide();
                         }, 500);
                         if (result.msgCode == "0002") {
-                            $location.path('/login');
+                            $scope.promptShow(result.msgDesc);
+                            $timeout(function () {
+                                $ionicLoading.hide();
+                                $location.path('/login');
+                            }, 800);
                         }
                     }
                 }).error(function () {

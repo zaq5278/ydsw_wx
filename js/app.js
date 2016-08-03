@@ -1,5 +1,5 @@
 
-angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
+angular.module('myApp', ['ionic','chart.js','myApp.controllers','myApp.services'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -10,8 +10,18 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       StatusBar.styleDefault();
     }
   });
-}).config(function($stateProvider,$urlRouterProvider) {
+}).config(function($stateProvider,$urlRouterProvider,$ionicConfigProvider,ChartJsProvider) {
   // $ionicConfigProvider.scrolling.jsScrolling(true);
+    $ionicConfigProvider.templates.maxPrefetch(0);//禁止预加载,加快首页速度
+    // 配置图表颜色
+    // ChartJsProvider.setOptions({
+    //     chartColors: ['#FF5252', '#FF8A80'],
+    //     responsive: true
+    // });
+    // // 配置图表线
+    // ChartJsProvider.setOptions('line', {
+    //     showLines: false
+    // });
   $stateProvider
       .state('index', {
           url: '/index',
@@ -34,6 +44,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
           'index.main': {  //所有被index.main管理的路由可以随意跳转
               templateUrl: "homePage.html",
               controller:'homePageController'
+              //controller:'UploaderController'
           }
         }
       })
@@ -104,6 +115,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       //客户拜访
       .state('customerVisit', {
           url: '/customerVisit',
+          cache:false,
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "customerVisit.html",
@@ -113,7 +125,8 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //门店或者经销商拜访的第一个页面详情
       .state('menDianSummary_visit', {
-          url: '/menDianSummary_visit/:customerid/:visitTab',
+          url: '/menDianSummary_visit/:customerid/:visitTab/:VISITINGTASKDATAID',
+          cache:false,
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "menDianSummary_visit.html",
@@ -123,7 +136,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //拜访任务步骤页面 8 或者 5
       .state('jobTask_Main', {
-          url: '/jobTask_Main/:visitTab',
+          url: '/jobTask_Main/:visitTab/:customerid/:VISITINGTASKDATAID',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "jobTask_Main.html",
@@ -133,7 +146,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //门店拜访促销员管理
       .state('promotionManagement', {
-          url: '/promotionManagement',
+          url: '/promotionManagement/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "promotionManagement.html",
@@ -143,7 +156,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //店内问题反馈
       .state('storeProblemFeedback', {
-          url: '/storeProblemFeedback',
+          url: '/storeProblemFeedback/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "storeProblemFeedback.html",
@@ -153,7 +166,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //拜访小结
       .state('visitSummary', {
-          url: '/visitSummary',
+          url: '/visitSummary/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "visitSummary.html",
@@ -161,9 +174,9 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
               }
           }
       })
-      //店内问题执行反馈
+      //店内执行反馈
       .state('storeProblemExecutionFeedback', {
-          url: '/storeProblemExecutionFeedback',
+          url: '/storeProblemExecutionFeedback/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "storeProblemExecutionFeedback.html",
@@ -173,7 +186,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //库存盘点
       .state('inventory_MenDian', {
-          url: '/inventory_MenDian',
+          url: '/inventory_MenDian/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "inventory_MenDian.html",
@@ -193,7 +206,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //排面品相统计
       .state('surfaceQualityStatistics', {
-          url: '/surfaceQualityStatistics',
+          url: '/surfaceQualityStatistics/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "surfaceQualityStatistics.html"
@@ -211,7 +224,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //冰柜核查
       .state('checkFreezer', {
-          url: '/checkFreezer',
+          url: '/checkFreezer/:customerid/:VISITINGTASKDATAID',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "checkFreezer.html",
@@ -221,16 +234,16 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //拜访交谈照片
       .state('visitChatPhotos', {
-          url: '/visitChatPhotos',
+          url: '/visitChatPhotos/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "visitChatPhotos.html"
               }
           }
       })
-      //拜访交谈照片
+      //沟通记录
       .state('communicationRecord', {
-          url: '/communicationRecord',
+          url: '/communicationRecord/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "communicationRecord.html"
@@ -239,7 +252,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //库存量(件)分类列表
       .state('stockClassification', {
-          url: '/stockClassification',
+          url: '/stockClassification/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "stockClassification.html"
@@ -257,7 +270,7 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       })
       //库存实景
       .state('stockRealPhotos', {
-          url: '/stockRealPhotos',
+          url: '/stockRealPhotos/:customerid',
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "stockRealPhotos.html"
@@ -267,10 +280,80 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
       //自定义拜访任务
       .state('editMenDianOrJxsList', {
           url: '/editMenDianOrJxsList/:visitTab',
+          cache:false,
           views: {
               'index.main': {  //所有被index.main管理的路由可以随意跳转
                   templateUrl: "editMenDianOrJxsList.html",
                   controller:'editMenDianOrJxsListController'
+              }
+          }
+      })
+      //培训
+      .state('train_px', {
+          url: '/train_px',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "train_px.html",
+                  controller:'train_pxController'
+              }
+          }
+      })
+      //培训详情
+      .state('train_px_detail', {
+          url: '/train_px_detail/:btnType',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "train_px_detail.html",
+                  controller:'train_px_detailController'
+              }
+          }
+      })
+      //报表查询
+      .state('reportQuery', {
+          url: '/reportQuery',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "reportQuery.html",
+                  controller:'reportQueryController'
+              }
+          }
+      })
+      //消息通知
+      .state('messageNotice', {
+          url: '/messageNotice',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "messageNotice.html",
+                  controller:'messageNoticeController'
+              }
+          }
+      })
+      //消息通知详情
+      .state('messageNotice_detail', {
+          url: '/messageNotice_detail/:newsId',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "messageNotice_detail.html",
+                  controller:'messageNotice_detailController'
+              }
+          }
+      })
+      //系统设置
+      .state('systemSettings', {
+          url: '/systemSettings',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "systemSettings.html",
+                  controller:'systemSettingsController'
+              }
+          }
+      })
+      //系统设置
+      .state('aboutUs', {
+          url: '/aboutUs',
+          views: {
+              'index.main': {  //所有被index.main管理的路由可以随意跳转
+                  templateUrl: "aboutUs.html"
               }
           }
       });
@@ -281,33 +364,86 @@ angular.module('myApp', ['ionic','myApp.controllers','myApp.services'])
 // var myUrl_47 = 'http://222.88.22.72:100/userServiceController.do?';
 // var myUrl = "http://100.100.1.55:8080/synear/";
 var myUrl = "http://171.8.66.195:8080/synear/";
+//var upFileUrl = "http://171.8.66.195:8080/synear/app/addAttachment.appjsonu";//正式
+//var upFileUrl = "http://192.168.16.176:9999/synear/app/addAttachment.appjsonu";
 // var myUrl = 'http://100.100.1.46:9999/';
 //var myUrl = "http://192.168.16.176:9999/synear/";
-
-// .state('login',{
-//     templateUrl: "login.html"
-// })
-//     .state('homePage',{
-//         templateUrl: "homePage.html"
-//     })
-//     .state('punchTheClock',{
-//         templateUrl: "punchTheClock.html"
-//     })
-//     .state('travelOnBusiness',{
-//         templateUrl: "travelOnBusiness.html"
-//     })
-//     .state('askedForLeave',{
-//         templateUrl: "askedForLeave.html"
-//     })
-//     .state('customerManagement',{
-//         templateUrl:'customerManagement.html'
-//     })
-//     .state('customer_MenDianDetail',{
-//         templateUrl:'customer_MenDianDetail.html'
-//     })
-//     .state('edit_menDianSummary',{
-//         templateUrl:'edit_menDianSummary.html'
-//     })
-//     .state('customer_JxsDetail',{
-//         templateUrl:'customer_JxsDetail.html'
-//     });
+/*.directive('fileModel', ['$parse', function ($parse) {
+ return {
+ restrict: 'A',
+ link: function(scope, element, attrs, ngModel) {
+ var model = $parse(attrs.fileModel);
+ var modelSetter = model.assign;
+ element.bind('change', function(event){
+ scope.$apply(function(){
+ modelSetter(scope, element[0].files[0]);
+ });
+ //附件预览
+ scope.file = (event.srcElement || event.target).files[0];
+ console.log(scope.file);
+ scope.getFile(scope.file);
+ });
+ }
+ };
+ }]).controller('UploaderController', function($scope, fileReader,$http,$timeout){
+ $scope.getFile = function (file) {
+ fileReader.readAsDataUrl(file, $scope)
+ .then(function(result) {
+ //console.log(result.split(',')[1]);
+ $scope.imageSrc = result;
+ $scope.myImage = result.split(',')[1];
+ //$scope.upLoadFile(result.split(',')[1]);
+ });
+ };
+ $scope.upLoadFile = function (data) {
+ $http({
+ url: upFileUrl,
+ method: "POST",
+ dataType:'json',
+ headers: {
+ 'Content-Type': 'application/x-www-form-urlencoded'
+ },
+ transformRequest: angular.identity,
+ params: {
+ "sessionid":JSON.parse(localStorage.ydsw_userDetail).sessionid,
+ "file":$scope.myImage,
+ "waterMarkContent":222,
+ "waterMarkContent2":2222
+ }
+ //data: "?sessionid="+ JSON.parse(localStorage.ydsw_userDetail).sessionid + "&waterMarkContent=222&waterMarkContent2=333" + "&file=sss"
+ }).success(function (result) {
+ console.log(result);
+ }).error(function () {
+ $scope.promptShow("网络错误！");
+ $timeout(function () {
+ $scope.lodingHide();
+ }, 800);
+ });
+ };
+ // var postData = {
+ //     vacationType: $scope.leave.type,
+ //     reason: $scope.leave.reason,
+ //     familyRelation: +$scope.leave.type == 7 ? $scope.leave.relation : "",
+ //     startTime: startTime,
+ //     endTime: endTime,
+ //     fileName: $scope.imageSrc,
+ //     workDelivers: workDelivers,
+ //     ccmailNickNames: sendPersons,
+ //     realDays: +$scope.leave.type == 8 ? $scope.leave.timeLong : ""
+ // };
+ // var promise = postMultipart('/maldives/leave/save', postData);
+ // function postMultipart(url, data) {
+ //     var fd = new FormData();
+ //     angular.forEach(data, function(val, key) {
+ //         fd.append(key, val);
+ //     });
+ //     var args = {
+ //         method: 'POST',
+ //         url: url,
+ //         data: fd,
+ //         headers: {'Content-Type': undefined},
+ //         transformRequest: angular.identity
+ //     };
+ //     return $http(args);
+ // }
+ })*/

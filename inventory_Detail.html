@@ -12,11 +12,11 @@
         </div>
     </ion-header-bar>
 
-    <ion-content>
+    <ion-content overflow-scroll="false">
         <div class="list">
             <label class="item item-input">
                 <span class="input-label">生产日期一：</span>
-                <input id="productionDate1" placeholder="请选择生产日期" type="text" ng-click="timeTouch('#productionDate1','date')" readonly>
+                <input id="productionDate1" placeholder="请选择生产日期" type="text" ng-click="closeModal();timeTouch('#productionDate1','date')" readonly>
             </label>
             <label class="item item-input">
                 <span class="input-label">生产日期一箱数(整数)：</span>

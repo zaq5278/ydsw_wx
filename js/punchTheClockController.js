@@ -7,7 +7,7 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
     $scope.punchTheclockDetail = [];
     //获取位置信息
     $scope.getLocation_by_wx_self = function (str) {
-        $scope.lodingShow();
+        $scope.lodingShow("加载中...");
         // var baidu_url = "http://api.map.baidu.com/geoconv/v1/?coords=" + '113.6542,34.86024' + "&ak=uCgec5YyeCeFkPLILZLS2guLOraELess&output=json" + '&callback=JSON_CALLBACK';
         // $http.jsonp(baidu_url).success(function (data) {
         //     console.log(data);
@@ -51,7 +51,7 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
 
     //跳转到打卡页面并获取打卡所有详细信息
     $scope.goToThePunchTheClockView = function () {
-        $scope.lodingShow();
+        $scope.lodingShow("加载中...");
         // http://222.88.22.71:8089/sinian/bodyGet?lenget=getInOut.appjson&bodyget=%7B%22sessionid%22%3Anull%2C%22wdate%22%3A%222016-05-09%22%7D
         var date = new Date();
         var y = date.getFullYear();
@@ -83,8 +83,11 @@ angular.module('myApp.controllers').controller('punchTheClockController',functio
                 $location.path('/punchTheClock');
             }else {
                 if (result.msgCode == "0002"){
-                    alert(result.msgDesc);
-                    $location.path('/login');
+                    $scope.promptShow(result.msgDesc);
+                    $timeout(function () {
+                        $ionicLoading.hide();
+                        $location.path('/login');
+                    }, 800);
                 }
             }
         }).error(function () {

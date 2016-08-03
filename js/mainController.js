@@ -10,15 +10,22 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
         window.location.href = "";
     };
     $scope.goBackView = function () {
-        $ionicHistory.goBack();
+        //$ionicHistory.goBack();
+        window.history.go(-1);
+    };
+    $scope.useStateGo = function (str) {
+        $state.go(str);
     };
     $scope.goBackHtmlView = function () {
         window.history.go(-1);
     };
     $scope.lodingShow = function (str) {
+        if(!str){
+            str = "加载中...";
+        }
         $ionicLoading.show({
-            template: "<ion-spinner icon='android'></ion-spinner>",
-            // + "<div>"+ str +"</div>",
+            template: "<ion-spinner icon='spiral' class='spinner-light'></ion-spinner>"
+             + "<div>"+ str +"</div>",
             noBackdrop: true
         });
     };
@@ -34,7 +41,8 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
     $scope.showAlert = function (str) {
         var alertPopup = $ionicPopup.alert({
             title: "温馨提示！",
-            template: str
+            template: str,
+            noBackdrop:true
         });
         alertPopup.then(function (res) {
             // console.log('点击了确定');
@@ -50,7 +58,7 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
                 timestamp: result.timestamp, // 必填，生成签名的时间戳
                 nonceStr: result.noncestr, // 必填，生成签名的随机串
                 signature: result.signature,// 必填，签名，见附录1
-                jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'downloadImage', 'openLocation', 'getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                jsApiList: ['chooseImage','previewImage','uploadImage','downloadImage','scanQRCode','openLocation','getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
             wx.hideOptionMenu();
             // $location.path('login');
@@ -86,11 +94,9 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
         };
         $(timeId).mobiscroll(opt);
     };
-    
     if(localStorage.ydsw_userDetail){
         $scope.userDetail = JSON.parse(localStorage.ydsw_userDetail);
     }
-
     //获取位置信息
     $scope.getLocation_by_wx = function (str) {
         // var baidu_url = "http://api.map.baidu.com/geoconv/v1/?coords=" + '113.6542,34.86024' + "&ak=uCgec5YyeCeFkPLILZLS2guLOraELess&output=json" + '&callback=JSON_CALLBACK';
@@ -220,5 +226,4 @@ angular.module('myApp.controllers',[]).controller('mainController',function($sco
             }, 500);
         })
     };
-
 });

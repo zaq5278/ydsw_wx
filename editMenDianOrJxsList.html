@@ -5,44 +5,45 @@
         </div>
         <h1 class="title" style="text-align: center">自定义拜访</h1>
         <div class="buttons">
-            <button class="button" ng-click="">保存</button>
+            <button class="button" ng-click="saveAndSubmit()">保存</button>
         </div>
     </ion-header-bar>
     <div class="item-input" >
         <div class="item item-input" style="width: 65%;margin: 0 auto;border-radius: 30px;height: 35px;margin-top: 37px;">
             <i class="icon ion-search placeholder-icon"></i>
-            <input id="customer_search" type="text" placeholder="搜索" ng-model="customer_search" ng-change="getShopOrJxsList('search')">
+            <input id="customer_search" type="text" placeholder="搜索" ng-model="editVisit_search" ng-change="getVisitTask('search')">
         </div>
         <a class="button icon ion-plus-circled button-clear button-positive" style="margin-top: 37px;border-radius: 30px;margin-right: 5px" ng-click="addCustomerInThisView()">客户添加</a>
     </div>
     <div style="text-align: center;color: #6b6b6b">
-        <span>您可以左滑列表,对拜访信息进行删除!</span>
+        <span>{{!addCustomerBtnStutas ? '您可以左滑列表,对拜访信息进行删除!' : '您可以点击按钮增加或取消拜访信息!'}}</span>
     </div>
-    <ion-content delegate-handle="" overflow-scroll='false' style="margin-top: 75px">
+    <ion-content delegate-handle="editMenDianOrJxs" overflow-scroll='false' style="margin-top: 75px">
         <ion-list show-delete="shouldShowDelete">
             <ion-item class="item-thumbnail-left" ng-repeat="visitTask_Detail in visitTask_DetailList">
                 <img src="imges/mendian.png" style="width: 68px;height: 68px;margin-top: 5px;margin-bottom: 0">
-                <table style="width: 100%;margin-top: 5px;">
+                <table style="width: 120%;margin-top: 5px;margin-left: -10px;">
                     <tr>
-                        <td style="margin-right: 15px">
+                        <td style="margin-right: 5px">
                             <div><span style="font-size: 15px">{{visitTask_Detail.CUSTNAME}}</span></div>
-                            <div><span style="color: #6b6e75;font-size: 13px;margin-top: 3px">{{visitTask_Detail.ADDRESS}}</span></div>
+                            <div style="width: 80%">
+                                <span class="item-text-wrap" style="color: #6b6e75;font-size: 13px;margin-top: 3px">{{visitTask_Detail.ADDRESS}}</span>
+                            </div>
+
+                            <img ng-show="addCustomerBtnStutas"  src={{selectedImg($index)}} style="height: 30px;width: 30px;float: right;margin-top: -20px;" ng-click="changeTheSelectStatus($event)">
                             <div style="font-size: 15px;margin-top: 3px;color:#6b6e75"><img src="imges/d-name.png" style="width: 15px;height: 18px"><span>门店</span><img src="imges/d-sj.png" style="width: 15px;height: 18px;margin-left: 40px"><span>{{visitTask_Detail.TELEPHONE}}</span></div>
-                            <label ng-show="addCustomerBtnStutas" class="toggle" style="float: right;margin-top: -50px;margin-left: 200px">
-                                {{addCustomerBtnStutas ? checkBtnIsSelected($index) : ''}}
-                                <input type="checkbox" ng-model="btnIsSelected" ng-change="ss" ><div class="track"><div class="handle"></div></div>
-                            </label>
                         </td>
                     </tr>
                 </table>
 
-                <ion-option-button ng-show="!addCustomerBtnStutas" class="button-assertive">
+                <ion-option-button ng-show="!addCustomerBtnStutas" class="button-assertive" ng-click="removeTheCustomer($index)">
                     删除
                 </ion-option-button>
             </ion-item>
         </ion-list>
-        <ion-infinite-scroll id="myInfiniteScroll" on-infinite="loadMoreCustomer()" ng-if="isCustomerShowScroll" distance="1%">
+        <ion-infinite-scroll style="margin-left: -25px;" on-infinite="getVisitTask()" ng-if="isEditShowScroll" distance="1%">
         </ion-infinite-scroll>
+        <span style="position: fixed;bottom: 22px;width: 100%;text-align: center;margin-left: 20px" ng-if="isEditShowScroll">加载中...</span>
     </ion-content>
 </ion-view>
 

@@ -8,14 +8,15 @@
         <h1 class="title" style="text-align: center">店内问题反馈</h1>
 
         <div class="buttons">
-            <button class="button" ng-click="">下一步</button>
+            <button class="button" ng-click="goToNext()">下一步</button>
         </div>
     </ion-header-bar>
 
     <ion-content>
         <div>
-            <textarea placeholder="请输入反馈内容" rows="5" style="width:100%;margin: 5px 2px 2px 2px ;border: double 1px #e4e5e7"></textarea>
+            <textarea placeholder="请输入反馈内容" rows="5" style="width:100%;margin: 5px 2px 2px 2px ;border: double 1px #e4e5e7" ng-model="feedbackContent.value" ></textarea>
         </div>
+        <!--ng-change="getTextareaVlaue(this.feedbackContent)"-->
     </ion-content>
 
 </ion-view>

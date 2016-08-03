@@ -7,13 +7,13 @@
         <!--<img class="title" src="imges/title_logo.png" style="width: 35%;height: 60%;margin: 0 auto;margin-top: 8px;">-->
         <h1 class="title" style="text-align: center">{{visitTask_Detail.CUSTNAME}}</h1>
 
-        <!--<div class="buttons">-->
-            <!--<button class="button icon ion-checkmark" ng-click="">提交</button>-->
-        <!--</div>-->
+        <div class="buttons">
+            <button ng-show="false" class="button" ng-click="">占</button>
+        </div>
     </ion-header-bar>
 
     <ion-content>
-        <div style="background-color: #eeeeee"><span style="margin: 10px 10px 10px 10px">{{visitTask_Detail.CUSTNAME}}</span></div>
+        <div style="background-color: #eeeeee;height: 33px;padding-top: 8px"><span style="margin-left: 10px">{{visitTask_Detail.CUSTNAME}}</span></div>
         <div class="list">
             <label class="item" style="height: 48px">
                 <span>地址</span>
@@ -28,7 +28,7 @@
                 <span style="float: right">{{visitTask_Detail.MOBILE}}</span>
             </label>
         </div>
-        <div style="background-color: #eeeeee;margin-top: -20px"><span style="margin: 10px 10px 10px 10px">拜访信息</span></div>
+        <div style="background-color: #eeeeee;height: 33px;margin-top: -20px;padding-top: 8px"><span style="margin-left: 10px">拜访信息</span></div>
         <div class="list">
             <label class="item" style="height: 48px">
                 <span>应收账款</span>

@@ -8,7 +8,7 @@ angular.module('myApp.controllers').controller('customer_MenDianController',func
     
     //点击客户管理内门店或者经销商列表跳转
     $scope.goToTheCustomerDetaill = function () {
-        $scope.lodingShow();
+        $scope.lodingShow("加载中...");
         var url = '';
         if ($stateParams.customer_ManagerDetail_CUSTOMERID[$stateParams.customer_ManagerDetail_CUSTOMERID.length - 1] == '2'){
             url = myUrl + "app/getVistShopInfo.appjson?sessionid=" + JSON.parse(localStorage.ydsw_userDetail).sessionid + "&customerid=" + $stateParams.customer_ManagerDetail_CUSTOMERID.substring(0,$stateParams.customer_ManagerDetail_CUSTOMERID.length - 1) + '&callback=JSON_CALLBACK';
@@ -29,8 +29,11 @@ angular.module('myApp.controllers').controller('customer_MenDianController',func
                 }
             }
             if (result.msgCode == '0002'){
-                alert(result.msgDesc);
-                $location.path('/login');
+                $scope.promptShow(result.msgDesc);
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    $location.path('/login');
+                }, 800);
             }
             if (result.msgCode == '0003'){
                 $scope.showAlert(result.msgDesc);
@@ -61,7 +64,7 @@ angular.module('myApp.controllers').controller('customer_MenDianController',func
     };
     
     $scope.sumbitTheEdited_MenDian = function () {
-        // $scope.lodingShow();
+        // $scope.lodingShow("加载中...");
         if ($scope.customer_MenDian.CHAIN == undefined){
             $scope.customer_MenDian.CHAIN = '';
         }
@@ -194,8 +197,11 @@ angular.module('myApp.controllers').controller('customer_MenDianController',func
                 $scope.closeModal();
             }
             if (result.msgCode == '0002'){
-                alert(result.msgDesc);
-                $location.path('/login');
+                $scope.promptShow(result.msgDesc);
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    $location.path('/login');
+                }, 800);
             }
         }).error(function () {
             $scope.promptShow("网络错误！");

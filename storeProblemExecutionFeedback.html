@@ -12,57 +12,16 @@
         </div>
     </ion-header-bar>
 
-    <ion-content>
-        <div class="list">
-            <label class="item">
-                <span class="input-label">TP项-进场费用</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">TP项-新品陈列</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">TP项-DM</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">TP项-TG</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">TP项-排面陈列</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">TP项-通路促销</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">TP项-其他</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">CP项-业务宣传反馈</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">CP项-卖场特价</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">CP项-买赠反馈</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">CP项-其他</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
-            <label class="item">
-                <span class="input-label">其他</span>
-                <button class="button ion ion-android-add"></button>
-            </label>
+    <ion-content overflow-scroll='false'>
+        <br>
+        <div class="list" ng-repeat="subSummary in allSummaryList">
+            <div class="row-wrap" ng-style="divStyle">
+                <span class="input-label" style="margin-left: 10px">{{subSummary}}</span>
+                <label id="{{subSummary}}"></label>
+                <button class="button ion ion-android-add" ng-click="openCamera_DNWTFK(subSummary)" style="margin-left: 10px"></button>
+            </div>
         </div>
+
     </ion-content>
 
 </ion-view>
