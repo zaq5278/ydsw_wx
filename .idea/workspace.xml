@@ -2,64 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da0fb955-8d1c-4970-b33e-22aa8ee61765" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imges/storeAdd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/{{selectedImg($index)}}" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/《HTML5从入门到精通》中文PDF文字版.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aboutUs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.appcache" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/Chart.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/angular-chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/angular-chart.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/messageNoticeController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/messageNotice_detailController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/reportQueryController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/systemSettingsController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/train_pxController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/train_px_detailController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/messageNotice.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/messageNotice_detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reportQuery.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/systemSettings.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/train_px.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/train_px_detail.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/jquery-2.1.4.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PromotionManagement.html" afterPath="$PROJECT_DIR$/PromotionManagement.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/checkFreezer.html" afterPath="$PROJECT_DIR$/checkFreezer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customerManagement.html" afterPath="$PROJECT_DIR$/customerManagement.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customerVisit.html" afterPath="$PROJECT_DIR$/customerVisit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customer_JxsDetail.html" afterPath="$PROJECT_DIR$/customer_JxsDetail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editMenDianOrJxsList.html" afterPath="$PROJECT_DIR$/editMenDianOrJxsList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/homePage.html" afterPath="$PROJECT_DIR$/homePage.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inventory_Detail.html" afterPath="$PROJECT_DIR$/inventory_Detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jobTask_Main.html" afterPath="$PROJECT_DIR$/jobTask_Main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/Inventory_MenDianController.js" afterPath="$PROJECT_DIR$/js/Inventory_MenDianController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.js" afterPath="$PROJECT_DIR$/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/checkFreezerController.js" afterPath="$PROJECT_DIR$/js/checkFreezerController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/customerManagerController.js" afterPath="$PROJECT_DIR$/js/customerManagerController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/customerVisitController.js" afterPath="$PROJECT_DIR$/js/customerVisitController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/customer_MenDianController.js" afterPath="$PROJECT_DIR$/js/customer_MenDianController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/editMenDianOrJxsListController.js" afterPath="$PROJECT_DIR$/js/editMenDianOrJxsListController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/jobTask_MainController.js" afterPath="$PROJECT_DIR$/js/jobTask_MainController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/loginController.js" afterPath="$PROJECT_DIR$/js/loginController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/mainController.js" afterPath="$PROJECT_DIR$/js/mainController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/promotionManagementController.js" afterPath="$PROJECT_DIR$/js/promotionManagementController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/punchTheClockController.js" afterPath="$PROJECT_DIR$/js/punchTheClockController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/services.js" afterPath="$PROJECT_DIR$/js/services.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/storeProblemExecutionFeedbackController.js" afterPath="$PROJECT_DIR$/js/storeProblemExecutionFeedbackController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/storeProblemFeedbackController.js" afterPath="$PROJECT_DIR$/js/storeProblemFeedbackController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/visitTaskSummarryController.js" afterPath="$PROJECT_DIR$/js/visitTaskSummarryController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/css/ionic.min.css" afterPath="$PROJECT_DIR$/lib/css/ionic.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menDianSummary_visit.html" afterPath="$PROJECT_DIR$/menDianSummary_visit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/punchTheClock.html" afterPath="$PROJECT_DIR$/punchTheClock.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storeProblemExecutionFeedback.html" afterPath="$PROJECT_DIR$/storeProblemExecutionFeedback.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storeProblemFeedback.html" afterPath="$PROJECT_DIR$/storeProblemFeedback.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/surfaceQualityStatistics.html" afterPath="$PROJECT_DIR$/surfaceQualityStatistics.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.html" afterPath="$PROJECT_DIR$/test.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/visitChatPhotos.html" afterPath="$PROJECT_DIR$/visitChatPhotos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/visitSummary.html" afterPath="$PROJECT_DIR$/visitSummary.html" />
     </list>
     <ignored path="ydsw_wx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,8 +25,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="26" column="112" selection-start-line="26" selection-start-column="112" selection-end-line="26" selection-end-column="112" />
+            <state relative-caret-position="396">
+              <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -146,7 +89,6 @@
         <option value="$PROJECT_DIR$/js/weixin.js" />
         <option value="$PROJECT_DIR$/js/systemSettingsController.js" />
         <option value="$PROJECT_DIR$/js/jquery-2.1.4.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/messageNotice.html" />
         <option value="$PROJECT_DIR$/punchTheClock.html" />
         <option value="$PROJECT_DIR$/messageNotice_detail.html" />
@@ -157,6 +99,7 @@
         <option value="$PROJECT_DIR$/train_px.html" />
         <option value="$PROJECT_DIR$/train_px_detail.html" />
         <option value="$PROJECT_DIR$/customer_JxsDetail.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -426,12 +369,12 @@
       <workItem from="1469678311755" duration="101000" />
       <workItem from="1469684176290" duration="11923000" />
       <workItem from="1469705488598" duration="38332000" />
-      <workItem from="1470104381455" duration="18615000" />
+      <workItem from="1470104381455" duration="18710000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="502060000" />
+    <option name="totallyTimeSpent" value="502155000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="6" y="23" width="1911" height="985" extended-state="0" />
@@ -963,8 +906,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="26" column="112" selection-start-line="26" selection-start-column="112" selection-end-line="26" selection-end-column="112" />
+        <state relative-caret-position="396">
+          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
           <folding />
         </state>
       </provider>
