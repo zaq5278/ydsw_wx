@@ -34,7 +34,7 @@ angular.module('myApp.controllers').controller('reportQueryController',function(
             timeout:60000
         }).success(function (result) {
             $scope.lodingHide();
-            console.log(result);
+            //console.log(result);
             if (result) {
                 if(result.msgCode == "0001"){
                     for (var i = 0;i < result.rows.length;i++){
