@@ -1,16 +1,6 @@
 
 angular.module('myApp', ['ionic','chart.js','myApp.controllers','myApp.services'])
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if (window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-}).config(function($stateProvider,$urlRouterProvider,$ionicConfigProvider,ChartJsProvider) {
+.config(function($stateProvider,$urlRouterProvider,$ionicConfigProvider,ChartJsProvider) {
   // $ionicConfigProvider.scrolling.jsScrolling(true);
     $ionicConfigProvider.templates.maxPrefetch(0);//禁止预加载,加快首页速度
     // 配置图表颜色

@@ -8,5 +8,6 @@
     <orderEntry type="library" name="ionic-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="ionic.bundle" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="ydsw_wx node_modules" level="project" />
   </component>
 </module>

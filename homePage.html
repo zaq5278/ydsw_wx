@@ -15,9 +15,9 @@
         <div class="dark-bg">
             <table style="width: 100%">
                 <tr>
-                    <td ng-show="isShowTheButton('打卡')" style="text-align: center;"><div class="button button-dark" ng-click="goToNewView('punchTheClock')"><div style="margin-top: 15px"><img style="width: 50%;height: 50%;" src="imges/daka.png"></div><div style="margin-top: -20px"><span style="color: white;">打卡</span></div></div></td>
-                    <td ng-show="isShowTheButton('出差')" style="text-align: center"><div class="button button-dark" ng-click="goToNewView('travelOnBusiness')"><div style="margin-top: 15px"><img style="width: 50%;height: 50%" src="imges/cailv.png"></div><div style="margin-top: -20px"><span style="color: white;">差旅</span></div></div></td>
-                    <td ng-show="isShowTheButton('请假')" style="text-align: center"><div class="button button-dark" ng-click="goToNewView('askedForLeave')"><div style="margin-top: 15px"><img style="width: 50%;height: 50%" src="imges/qingjia.png"></div><div style="margin-top: -20px"><span style="color: white;">请假</span></div></div></td>
+                    <td ng-if="isShowTheButton('打卡')" style="text-align: center;"><div class="button button-dark" ng-click="goToNewView('punchTheClock')"><div style="margin-top: 15px"><img style="width: 50%;height: 50%;" src="imges/daka.png"></div><div style="margin-top: -20px"><span style="color: white;">打卡</span></div></div></td>
+                    <td ng-if="isShowTheButton('出差')" style="text-align: center"><div class="button button-dark" ng-click="goToNewView('travelOnBusiness')"><div style="margin-top: 15px"><img style="width: 50%;height: 50%" src="imges/cailv.png"></div><div style="margin-top: -20px"><span style="color: white;">差旅</span></div></div></td>
+                    <td ng-if="isShowTheButton('请假')" style="text-align: center"><div class="button button-dark" ng-click="goToNewView('askedForLeave')"><div style="margin-top: 15px"><img style="width: 50%;height: 50%" src="imges/qingjia.png"></div><div style="margin-top: -20px"><span style="color: white;">请假</span></div></div></td>
                 </tr>
             </table>
         </div>
@@ -32,12 +32,12 @@
         <div>
             <table style="width: 100%;margin-top: 20px">
                 <tr>
-                    <td ng-show="isShowTheButton('客户拜访')" style="text-align: center;border-right: double 1px #eeeeee;border-bottom: double 1px #eeeeee"><div class="button button-light" ng-click="goToNewView('customerVisit')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%;" src="imges/kehubaifang.png"></div><div style="margin-top: -20px"><span style="color: black">客户拜访</span></div></div></td>
-                    <td ng-show="isShowTheButton('培训')" style="text-align: center;border-bottom: double 1px #eeeeee"><div class="button button-light" ng-click="goToNewView('train_px')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%" src="imges/peixun.png"></div><div style="margin-top: -20px"><span style="color: black">培训</span></div></div></td>
+                    <td ng-if="isShowTheButton('客户拜访')" style="text-align: center;border-right: double 1px #eeeeee;border-bottom: double 1px #eeeeee"><div class="button button-light" ng-click="goToNewView('customerVisit')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%;" src="imges/kehubaifang.png"></div><div style="margin-top: -20px"><span style="color: black">客户拜访</span></div></div></td>
+                    <td ng-if="isShowTheButton('培训')" style="text-align: center;border-bottom: double 1px #eeeeee"><div class="button button-light" ng-click="goToNewView('train_px')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%" src="imges/peixun.png"></div><div style="margin-top: -20px"><span style="color: black">培训</span></div></div></td>
                 </tr>
                 <tr>
-                    <td ng-show="isShowTheButton('客户管理')" style="text-align: center;border-right: double 1px #eeeeee"><div class="button button-light" ng-click="goToNewView('customerManagement')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%;" src="imges/kehuguanli.png"></div><div style="margin-top: -20px"><span style="color: black">客户管理</span></div></div></td>
-                    <td ng-show="isShowTheButton('报表查询')" style="text-align: center"><div class="button button-light" ng-click="goToNewView('reportQuery')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%" src="imges/baobiaochaxun.png"></div><div style="margin-top: -20px"><span style="color: black">报表查询</span></div></div></td>
+                    <td ng-if="isShowTheButton('客户管理')" style="text-align: center;border-right: double 1px #eeeeee"><div class="button button-light" ng-click="goToNewView('customerManagement')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%;" src="imges/kehuguanli.png"></div><div style="margin-top: -20px"><span style="color: black">客户管理</span></div></div></td>
+                    <td ng-if="isShowTheButton('报表查询')" style="text-align: center"><div class="button button-light" ng-click="goToNewView('reportQuery')"><div style="margin-top: 15px"><img style="width: 60%;height: 60%" src="imges/baobiaochaxun.png"></div><div style="margin-top: -20px"><span style="color: black">报表查询</span></div></div></td>
                 </tr>
             </table>
         </div>

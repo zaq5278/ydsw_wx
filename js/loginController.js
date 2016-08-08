@@ -27,19 +27,13 @@ angular.module('myApp.controllers').controller('loginController',['$scope','$htt
         var userName = document.getElementById("userName").value;
         var passWord = document.getElementById("passWord").value;
         var url = myUrl + 'userServiceController.do?applogin&phoneId=1&userName=' + userName + '&passWord=' + passWord + '&callback=JSON_CALLBACK';
-        // $http({
-        //     method:'jsonp',
-        //     url:url
-        // }).success(function (result) {
-        //     console.log(result);
-        // }).error();
+
         $http({
-            method:'jsonp',
-            url:url,
+            method: 'jsonp',
+            url: url,
             timeout:60000
-        }).success(function (result) {
-            // $scope.lodingHide();
-            // console.log(result);
+        }).then(function successCallback(result) {
+            result = result.data;
             if (result.msgCode == '0001'){
                 localStorage.clear();
                 localStorage.passWord_ydsw_wx = passWord;
@@ -56,12 +50,41 @@ angular.module('myApp.controllers').controller('loginController',['$scope','$htt
                     $scope.lodingHide();
                 }, 1000);
             }
-        }).error(function () {
+        }, function errorCallback(response) {
             $scope.promptShow("网络错误！");
             $timeout(function () {
                 $scope.lodingHide();
             }, 500);
         });
+        // $http({
+        //     method:'jsonp',
+        //     url:url,
+        //     timeout:60000
+        // }).success(function (result) {
+        //     // $scope.lodingHide();
+        //     // console.log(result);
+        //     if (result.msgCode == '0001'){
+        //         localStorage.clear();
+        //         localStorage.passWord_ydsw_wx = passWord;
+        //         localStorage.ydsw_userDetail = JSON.stringify(result);
+        //         $scope.userDetail = JSON.parse(localStorage.ydsw_userDetail);
+        //         //0-连锁 1-渠道 2-部门 3-销售代表 4-所属经销商 5-理货员 6-经销商业务员 7-省
+        //         var menDianDetaillList = ['getChain','getChannel','getSaleDepartment','getSaleMan','getSelfJxs','getSaleMansOne','getSaleMansThree','getProvince'];
+        //         for (var i = 0;i < menDianDetaillList.length;i++){
+        //             $scope.getMenDianOtherSummary(menDianDetaillList[i]);
+        //         }
+        //     }else {
+        //         $scope.promptShow(result.msgDesc);
+        //         $timeout(function () {
+        //             $scope.lodingHide();
+        //         }, 1000);
+        //     }
+        // }).error(function () {
+        //     $scope.promptShow("网络错误！");
+        //     $timeout(function () {
+        //         $scope.lodingHide();
+        //     }, 500);
+        // });
     };
     
 }]);
